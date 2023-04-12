@@ -1,0 +1,157 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL_MIGRATE")
+}
+
+model User {
+  id           String    @id @default(cuid()) @map("_id")
+  username     String    @unique
+  email        String    @unique
+  avatar       String?
+  passwordHash String
+  accessToken  String?   @unique
+  expiresAt    DateTime? @map(name: "expires_at")
+  createdAt    DateTime  @default(now()) @map(name: "created_at")
+  updatedAt    DateTime  @updatedAt @map(name: "updated_at")
+
+  campaigns        Campaign[]
+  PlayerOnCampaign PlayerOnCampaign[]
+
+  @@map(name: "users")
+}
+
+model Campaign {
+  id         String  @id @default(cuid()) @map("_id")
+  title      String
+  summary    String?
+  cover      String?
+  isFavorite Boolean
+
+  createdById String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  players PlayerOnCampaign[]
+  User    User?              @relation(fields: [userId], references: [id])
+  userId  String?
+
+  @@map(name: "campaigns")
+}
+
+model PlayerOnCampaign {
+  id String @id @default(cuid()) @map("_id")
+
+  createdById String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  isMaster Boolean
+
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+  campaignId String
+
+  player   User   @relation(fields: [playerId], references: [id])
+  playerId String
+
+  @@map(name: "players-on-campaigns")
+}
+
+model Element {
+  id          String  @id @default(cuid()) @map("_id")
+  name        String?
+  description String?
+  cover       String?
+
+  isFavorite Boolean
+  exists     Boolean
+
+  createdById String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  elementsOnQuest           ElementOnQuest[]
+  mainElementOnElement      ElementOnElement[] @relation("element")
+  relatesToElementOnElement ElementOnElement[] @relation("relatesToElement")
+
+  @@map(name: "elements")
+}
+
+model ElementOnElement {
+  id String @id @default(cuid()) @map("_id")
+
+  createdById String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  element   Element @relation(name: "element", fields: [elementId], references: [id])
+  elementId String
+
+  relatesToElement   Element @relation(name: "relatesToElement", fields: [relatesToElementId], references: [id])
+  relatesToElementId String
+
+  @@map(name: "elements-on-elements")
+}
+
+model ElementOnQuest {
+  id String @id @default(cuid()) @map("_id")
+
+  createdById String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  element   Element @relation(fields: [elementId], references: [id])
+  elementId String
+
+  quest   Quest  @relation(fields: [questId], references: [id])
+  questId String
+
+  startsQuest Boolean
+
+  @@map(name: "elements-on-quests")
+}
+
+model Quest {
+  id String @id @default(cuid())
+
+  name        String?
+  surname     String?
+  nickname    String?
+  description String?
+  cover       String?
+
+  isFavorite  Boolean
+  isCompleted Boolean
+
+  createdById String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  elementOnQuest        ElementOnQuest[]
+  mainQuestOnQuest      QuestOnQuest[]   @relation("quest")
+  relatesToQuestOnQuest QuestOnQuest[]   @relation("relatesToQuest")
+
+  @@map(name: "quests")
+}
+
+model QuestOnQuest {
+  id String @id @default(cuid()) @map("_id")
+
+  createdById String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  quest   Quest  @relation(name: "quest", fields: [questId], references: [id])
+  questId String
+
+  relatesToQuest   Quest  @relation(name: "relatesToQuest", fields: [relatesToQuestId], references: [id])
+  relatesToQuestId String
+
+  @@map(name: "quests-on-quests")
+}
