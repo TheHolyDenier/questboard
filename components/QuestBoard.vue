@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useQuests } from '~/stores/quest.store';
 import QuestDetail from '~/components/QuestDetail.vue';
+import { QuestDto } from '~/domain/quests/quest.dto';
 
 const { quests } = useQuests();
+const selectedQuest = ref<null | QuestDto>(null);
 </script>
 
 <template>
@@ -11,12 +13,16 @@ const { quests } = useQuests();
       <h1>Campaign</h1>
     </div>
     <div class="quest-board__list">
-      <template v-for="quest of quests" :key="quest.id">
-        <h2>- {{ quest.title }}</h2>
-        <p>{{ quest.description }}</p>
-      </template>
+      <div
+        v-for="quest of quests"
+        :key="quest.id"
+        class="card-parchment"
+        @click="selectedQuest = quest"
+      >
+        <p>- {{ quest.title }}</p>
+      </div>
     </div>
-    <QuestDetail v-if="quests.length" :quest="quests[0]" />
+    <QuestDetail v-if="selectedQuest" :quest="selectedQuest" />
   </div>
 </template>
 
@@ -35,7 +41,15 @@ const { quests } = useQuests();
     text-align: center;
   }
 
-  &__list {
+  &__list > div {
+    transition: transform 0.3s ease;
+    padding: 0.5em;
+    margin: 1em;
+
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
   }
 }
 </style>

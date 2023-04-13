@@ -15,6 +15,7 @@
 $primary: #f9c9b6;
 $secondary: #333333;
 $secondary-light: #8c8c8c;
+$background: #39271b;
 
 
 *,
@@ -24,6 +25,8 @@ $secondary-light: #8c8c8c;
   margin: 0;
   position: relative;
   font-weight: normal;
+  font-family: 'IM Fell English', serif;
+
 }
 
 
@@ -31,7 +34,6 @@ $secondary-light: #8c8c8c;
   min-height: 100vh;
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
-  font-family: 'IM Fell English', serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -52,6 +54,8 @@ a {
   padding: 1em;
   color: $primary !important;
   position:relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
 
   &::before, &::after {
     content: "";
@@ -82,7 +86,7 @@ a {
   color: $secondary;
 }
 
-.separator {
+h1 {
   display: flex;
   align-items: center;
   text-align: center;
@@ -99,3 +103,19 @@ a {
     margin-left: .25em;
   }
 }
+
+
+button {
+  background-color: $primary;
+  color: $background;
+  border: 1px solid $background;
+  border-radius: 5px;
+  padding: 0.2em 0.5em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  &:hover {
+    background-color: rgba($primary, 0.8);
+  }  }
