@@ -1,29 +1,41 @@
+<script setup lang="ts">
+import { useQuests } from '~/stores/quest.store';
+import QuestDetail from '~/components/QuestDetail.vue';
+
+const { quests } = useQuests();
+</script>
+
 <template>
-  <div class="quest-board">
-    <div class="quest-board__header">
-      <img src="@/img/quest-header.png" />
+  <div class="quest-board card-wood">
+    <div class="quest-board__header separator">
+      <h1>Campaign</h1>
     </div>
     <div class="quest-board__list">
-      <img src="@/img/quest-list.png" />
+      <template v-for="quest of quests" :key="quest.id">
+        <h2>- {{ quest.title }}</h2>
+        <p>{{ quest.description }}</p>
+      </template>
     </div>
-    <div class="quest-board__detail">
-      <img src="@/img/quest-detail.png" />
-    </div>
+    <QuestDetail v-if="quests.length" :quest="quests[0]" />
   </div>
 </template>
 
-<script setup></script>
-
 <style scoped lang="scss">
+@import 'settings.scss';
+
 .quest-board {
-  width: 800px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 1em;
 
   &__header {
     grid-column: -1/1;
     margin-block-end: -10px;
     margin-inline-start: 2px;
+    text-align: center;
+  }
+
+  &__list {
   }
 }
 </style>
