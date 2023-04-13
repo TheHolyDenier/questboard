@@ -1,13 +1,13 @@
 <template>
   <NuxtLayout>
     <!--    <CreateProjectForm />-->
-    Tata
+    <QuestBoard />
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'unsign'
 });
 </script>
 
