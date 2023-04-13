@@ -1,35 +1,29 @@
 import * as dotenv from 'dotenv';
-import vuetify from 'vite-plugin-vuetify';
 
 dotenv.config();
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  css: [
-    'vuetify/styles',
-    '~/settings.scss',
-    '@mdi/font/css/materialdesignicons.css'
-  ], // vuetify ships precompiled css, no need to import sass
+  css: ['~/settings.scss', '@mdi/font/css/materialdesignicons.css'],
   vite: {
     ssr: {
-      noExternal: ['vuetify'] // add the vuetify vite plugin
+      noExternal: []
     },
     define: {
       'process.env.DEBUG': false
     }
   },
   build: {
-    transpile: ['vuetify']
+    transpile: []
   },
   modules: [
-    // this adds the vuetify vite plugin
-    // also produces type errors in the current beta release
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async (options, nuxt) => {
       // @ts-ignore
       nuxt.hooks.hook('vite:extendConfig', (config) => {
         if (!config.plugins) config.plugins = [];
-        return config.plugins.push(vuetify());
+        // return config.plugins.push(vuetify());
+        return config;
       });
     },
     '@pinia/nuxt'
