@@ -16,6 +16,8 @@ const emit = defineEmits<{
 }>();
 
 const inputValue = ref('');
+const error = ref(false);
+const errorMessage = ref<string | null>(null);
 
 watch(
   () => inputValue.value,
@@ -26,6 +28,27 @@ watch(
     });
   }
 );
+
+const validate = async () => {
+  error.value = false;
+  errorMessage.value = null;
+  if (
+    props.inputDefinition.required &&
+    (!inputValue.value || inputValue.value === '')
+  ) {
+    error.value = true;
+  }
+
+  for (const validation of props.inputDefinition.validations) {
+    const result = await validation(inputValue.value);
+    if (result !== true) {
+      error.value = true;
+      errorMessage.value = String(result);
+    }
+  }
+
+  return error.value;
+};
 </script>
 
 <template>
@@ -33,6 +56,9 @@ watch(
     v-model="inputValue"
     :label="inputDefinition.label"
     :required="inputDefinition.required"
+    :error="error"
+    :hint="error ? errorMessage.value : inputDefinition.hint"
+    @blur="validate"
   />
 </template>
 

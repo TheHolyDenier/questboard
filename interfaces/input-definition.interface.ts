@@ -6,4 +6,5 @@ export interface InputDefinitionInterface {
   disabled?: boolean;
   readonly?: boolean;
   hint?: string;
+  validations: ((inputValue: string) => Promise<boolean | string>)[];
 }
