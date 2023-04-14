@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { computed, PropType } from 'vue';
 import { InputDefinitionInterface } from '~/interfaces/input-definition.interface';
 import BaseFormInput from '~/components/base/form/BaseFormInput.vue';
 import { InputEventInterface } from '~/interfaces/input-event.interface';
+import { FormDataInterface } from '~/interfaces/form-data.interface';
 
 defineProps({
   inputDefinitions: {
@@ -13,21 +14,31 @@ defineProps({
 });
 
 const emit = defineEmits<{
-  (e: 'on:change', inputEvents: InputEventInterface[]): void;
+  (e: 'on:change', dataForm: FormDataInterface): void;
+  (e: 'on:submit', dataForm: FormDataInterface): void;
 }>();
 
-const dataForm = reactive<InputEventInterface[]>([]);
+const inputValues = reactive<InputEventInterface[]>([]);
+const formData = computed<FormDataInterface>(() =>
+  inputValues.reduce(
+    (acc: FormDataInterface, value: InputEventInterface) =>
+      Object.assign(acc, { [value.name]: value.value }),
+    {}
+  )
+);
 
 const updateDataForm = (inputEvent: InputEventInterface) => {
-  const index = dataForm.findIndex((data) => data.name === inputEvent.name);
+  const index = inputValues.findIndex((data) => data.name === inputEvent.name);
   if (index === -1) {
-    dataForm.push(inputEvent);
+    inputValues.push(inputEvent);
   } else {
-    dataForm[index].value = inputEvent.value;
+    inputValues[index].value = inputEvent.value;
   }
 
-  emit('on:change', dataForm);
+  emit('on:change', formData.value);
 };
+
+const submit = () => emit('on:submit', formData.value);
 </script>
 
 <template>
@@ -39,7 +50,7 @@ const updateDataForm = (inputEvent: InputEventInterface) => {
       @on:change="updateDataForm"
     />
     <div class="form__actions">
-      <BaseButton :label="okButtonLabel" />
+      <BaseButton :label="okButtonLabel" @click="submit" />
     </div>
   </div>
 </template>

@@ -1,10 +1,10 @@
 export interface InputDefinitionInterface {
   name: string;
   label: string;
-  type?: 'string';
+  type?: 'text' | 'password';
   required?: boolean;
   disabled?: boolean;
   readonly?: boolean;
   hint?: string;
-  validations: ((inputValue: string) => Promise<boolean | string>)[];
+  validations?: ((inputValue: string) => Promise<boolean | string>)[];
 }

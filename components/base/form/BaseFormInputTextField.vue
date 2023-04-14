@@ -42,7 +42,7 @@ const validate = async () => {
     if (error.value) return true;
   }
 
-  for (const validation of props.inputDefinition.validations) {
+  for (const validation of props.inputDefinition.validations || []) {
     const result = await validation(inputValue.value);
     if (result !== true) {
       error.value = true;
@@ -61,7 +61,8 @@ const validate = async () => {
     :label="inputDefinition.label"
     :required="inputDefinition.required || false"
     :error="error"
-    :hint="error ? errorMessage : inputDefinition.hint"
+    :hint="(error ? errorMessage : inputDefinition.hint) || ''"
+    :type="inputDefinition.type || 'text'"
     @blur="validate"
   />
 </template>

@@ -120,9 +120,7 @@ model ElementOnQuest {
 model Quest {
   id String @id @default(cuid())
 
-  name        String?
-  surname     String?
-  nickname    String?
+  title       String?
   description String?
   cover       String?
 

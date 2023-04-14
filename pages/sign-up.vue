@@ -1,28 +1,34 @@
 <script setup lang="ts">
 import { InputDefinitionInterface } from '~/interfaces/input-definition.interface';
 import BaseForm from '~/components/base/form/BaseForm.vue';
+import { useUser } from '~/stores/user.store';
+import { InputEventInterface } from '~/interfaces/input-event.interface';
 
 definePageMeta({
   middleware: 'unsign',
   layout: 'auth'
 });
 
+const user = useUser();
+
 const inputDefinitions: InputDefinitionInterface[] = [
   { name: 'username', label: 'Username', required: true },
   { name: 'email', label: 'Email', required: true },
-  { name: 'password', label: 'Password', required: true }
+  { name: 'password', label: 'Password', required: true, type: 'password' }
 ];
 
-function submit() {
-  // Handle form submission
-}
+const signUp = async (signUp: InputEventInterface) => await user.signUp(signUp);
 </script>
 
 <template>
   <div class="signup-form card-wood" @submit.prevent="submit">
     <h1 class="form-title">Sign Up</h1>
 
-    <BaseForm :input-definitions="inputDefinitions" ok-button-label="Sign Up" />
+    <BaseForm
+      :input-definitions="inputDefinitions"
+      ok-button-label="Sign Up"
+      @on:submit="signUp"
+    />
   </div>
 </template>
 

@@ -1,4 +1,4 @@
 export interface InputEventInterface {
-  name: String;
-  value: String | number | boolean;
+  name: string;
+  value: string | number | boolean;
 }
