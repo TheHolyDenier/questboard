@@ -23,9 +23,7 @@
         Questboard. Try it today and start enjoying the adventure!
       </p>
       <div class="intro__button">
-        <RouterLink :to="{ name: 'sign-up' }">
-          <button>Start now!</button>
-        </RouterLink>
+        <BaseButton label="Start now!" :to="{ name: 'sign-up' }" />
       </div>
     </div>
   </NuxtLayout>
@@ -33,7 +31,8 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  middleware: 'unsign'
+  middleware: 'unsign',
+  layout: 'auth'
 });
 </script>
 

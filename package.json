@@ -38,7 +38,8 @@
     "lodash": "^4.17.21",
     "pinia": "^2.0.32",
     "sass": "^1.58.3",
-    "vue-eslint-parser": "^9.1.0"
+    "vue-eslint-parser": "^9.1.0",
+    "maz-ui": "3.8.0"
   },
   "name": "the-plotter",
   "description": "Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.",

@@ -4,7 +4,11 @@ dotenv.config();
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  css: ['~/settings.scss', '@mdi/font/css/materialdesignicons.css'],
+  css: [
+    'maz-ui/css/main.css',
+    '~/settings.scss',
+    '@mdi/font/css/materialdesignicons.css'
+  ],
   vite: {
     ssr: {
       noExternal: []
@@ -14,20 +18,9 @@ export default defineNuxtConfig({
     }
   },
   build: {
-    transpile: []
+    transpile: ['maz-ui']
   },
-  modules: [
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async (options, nuxt) => {
-      // @ts-ignore
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
-        if (!config.plugins) config.plugins = [];
-        // return config.plugins.push(vuetify());
-        return config;
-      });
-    },
-    '@pinia/nuxt'
-  ],
+  modules: ['@pinia/nuxt'],
   // @ts-ignore
   pinia: {
     autoImports: [
@@ -36,10 +29,4 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'] // import { defineStore as definePiniaStore } from 'pinia'
     ]
   }
-  // buildModules: ['@nuxtjs/google-fonts'],
-  // googleFonts: {
-  //   families: {
-  //     'Syne+Mono': true
-  //   }
-  // }
 });

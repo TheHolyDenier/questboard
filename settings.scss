@@ -1,3 +1,6 @@
+@import "/styles/variables.scss";
+
+
 @font-face {
   font-family: 'IM Fell English';
   src: url('/fonts/IMFellEnglish-Regular.ttf') format('truetype');
@@ -11,12 +14,6 @@
   font-weight: normal;
   font-style: italic;
 }
-
-$primary: #f9c9b6;
-$secondary: #333333;
-$secondary-light: #8c8c8c;
-$background: #39271b;
-
 
 *,
 *::before,
@@ -49,12 +46,12 @@ a {
 }
 
 .card-wood {
+  max-width: 1000px;
   background-image: url('@/svg/wood.svg');
   background-size: cover;
-  padding: 1em;
+  padding: 1.5em;
   color: $primary !important;
   position:relative;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 
 
   &::before, &::after {
@@ -105,17 +102,3 @@ h1 {
 }
 
 
-button {
-  background-color: $primary;
-  color: $background;
-  border: 1px solid $background;
-  border-radius: 5px;
-  padding: 0.2em 0.5em;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  font-weight: 600;
-
-  &:hover {
-    background-color: rgba($primary, 0.8);
-  }  }

@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { InputDefinitionInterface } from '~/interfaces/input-definition.interface';
+import BaseForm from '~/components/base/form/BaseForm.vue';
 
 definePageMeta({
-  middleware: 'unsign'
+  middleware: 'unsign',
+  layout: 'auth'
 });
 
-const email = ref('');
-const password = ref('');
-const confirmPassword = ref('');
+const inputDefinitions: InputDefinitionInterface[] = [
+  { name: 'username', label: 'Username', required: true },
+  { name: 'email', label: 'Email', required: true },
+  { name: 'password', label: 'Password', required: true }
+];
 
 function submit() {
   // Handle form submission
@@ -15,77 +19,11 @@ function submit() {
 </script>
 
 <template>
-  <form class="signup-form" @submit.prevent="submit">
-    <h2 class="form-title">Sign Up</h2>
+  <div class="signup-form card-wood" @submit.prevent="submit">
+    <h1 class="form-title">Sign Up</h1>
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input id="email" v-model="email" type="email" required />
-    </div>
-
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input id="password" v-model="password" type="password" required />
-    </div>
-
-    <div class="form-group">
-      <label for="confirm-password">Confirm Password</label>
-      <input
-        id="confirm-password"
-        v-model="confirmPassword"
-        type="password"
-        required
-      />
-    </div>
-
-    <button type="submit">Sign Up</button>
-  </form>
+    <BaseForm :input-definitions="inputDefinitions" ok-button-label="Sign Up" />
+  </div>
 </template>
 
-<style lang="scss">
-.signup-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-
-  .form-title {
-    margin-top: 0;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-
-    label {
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    input {
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-    }
-  }
-
-  button {
-    padding: 0.5rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background-color: #0069d9;
-    }
-  }
-}
-</style>
+<style lang="scss"></style>

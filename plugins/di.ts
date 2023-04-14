@@ -6,7 +6,7 @@ export const api = {
   user: new UserService()
 };
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(() => {
   return {
     provide: {
       api
