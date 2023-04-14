@@ -4,11 +4,9 @@ import { ApiResponse } from '~/interfaces/api-response';
 import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 
 export default defineEventHandler(
-  async (event: H3Event): Promise<ApiResponse<User>> => {
-    return {
-      statusCode: getStatusCode(StatusMessageEnum.OK),
-      statusMessage: StatusMessageEnum.OK,
-      data: event.context.user
-    };
-  }
+  (event: H3Event): ApiResponse<User> => ({
+    statusCode: getStatusCode(StatusMessageEnum.OK),
+    statusMessage: StatusMessageEnum.OK,
+    data: event.context.user
+  })
 );

@@ -4,6 +4,8 @@ definePageMeta({
 });
 </script>
 
-<template></template>
+<template>
+  <h1>Campaigns</h1>
+</template>
 
 <style scoped lang="scss"></style>

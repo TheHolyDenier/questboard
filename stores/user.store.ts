@@ -2,7 +2,6 @@ import { User } from '.prisma/client';
 import { SignInDto } from '~/domain/auth/sign-in.dto';
 import { api } from '~/plugins/di';
 import { LocalStorageService } from '~/services/local-storage.service';
-import { SignUpDto } from '~/domain/auth/sign-up.dto';
 import { UpdateUserDto } from '~/domain/users/update-user.dto';
 import { InputEventInterface } from '~/interfaces/input-event.interface';
 
