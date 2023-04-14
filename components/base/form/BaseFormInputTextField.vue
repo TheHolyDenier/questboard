@@ -37,6 +37,9 @@ const validate = async () => {
     (!inputValue.value || inputValue.value === '')
   ) {
     error.value = true;
+    errorMessage.value = `${props.inputDefinition.label} is required`;
+
+    if (error.value) return true;
   }
 
   for (const validation of props.inputDefinition.validations) {
@@ -44,10 +47,11 @@ const validate = async () => {
     if (result !== true) {
       error.value = true;
       errorMessage.value = String(result);
+      if (error.value) return true;
     }
   }
 
-  return error.value;
+  return false;
 };
 </script>
 
@@ -55,9 +59,9 @@ const validate = async () => {
   <MazInput
     v-model="inputValue"
     :label="inputDefinition.label"
-    :required="inputDefinition.required"
+    :required="inputDefinition.required || false"
     :error="error"
-    :hint="error ? errorMessage.value : inputDefinition.hint"
+    :hint="error ? errorMessage : inputDefinition.hint"
     @blur="validate"
   />
 </template>
