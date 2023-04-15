@@ -16,7 +16,7 @@ const selectedQuest = ref<null | QuestDto>(null);
       <div
         v-for="quest of quests"
         :key="quest.id"
-        class="card-parchment"
+        class="card-parchment mini"
         @click="selectedQuest = quest"
       >
         <p>- {{ quest.title }}</p>

@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1em;
   height: 100vh;
   width: 100vw;
 }
