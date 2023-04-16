@@ -30,7 +30,11 @@ watch(
 
 <template>
   <div v-if="selectedCampaign">
-    <h1>{{ selectedCampaign.title }}</h1>
+    <h1>
+      {{ selectedCampaign.title }}
+      <BaseButton leading-icon="bone-bite" label="Delete" />
+    </h1>
+
     <QuestBoard />
   </div>
 </template>

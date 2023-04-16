@@ -8,4 +8,5 @@ export interface ListItemInterface {
   to?: RouteLocationRaw;
   leadingIcon?: IconType;
   trailingIcon?: IconType;
+  nameClass?: string;
 }

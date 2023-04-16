@@ -9,7 +9,8 @@ const props = defineProps({
     type: String as PropType<ColorType>,
     default: 'primary'
   },
-  size: { type: String, default: '16px' }
+  size: { type: String, default: '16px' },
+  contrastColor: { type: Boolean }
 });
 
 const src = `/icons/${props.icon}.svg`;
@@ -19,7 +20,9 @@ const src = `/icons/${props.icon}.svg`;
   <span
     class="icon"
     :style="{
-      backgroundColor: `var(--maz-color-${props.color})`,
+      backgroundColor: `var(--maz-color-${props.color}${
+        contrastColor ? '-contrast' : ''
+      })`,
       '-webkit-mask': `url(${src}) no-repeat center / contain`,
       mask: `url(${src}) no-repeat center / contain`,
       width: props.size,

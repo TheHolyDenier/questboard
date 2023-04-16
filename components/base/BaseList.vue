@@ -6,11 +6,18 @@ import BaseListItem from '~/components/base/BaseListItem.vue';
 defineProps({
   list: { type: Array as PropType<ListItemInterface[]>, default: () => [] }
 });
+
+defineEmits<{ (e: 'on:click', value: string): void }>();
 </script>
 
 <template>
   <div class="list">
-    <BaseListItem v-for="item of list" :key="item.name" :item="item" />
+    <BaseListItem
+      v-for="item of list"
+      :key="item.name"
+      :item="item"
+      @on:click="$emit('on:click', $event)"
+    />
   </div>
 </template>
 

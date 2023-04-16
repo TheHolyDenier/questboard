@@ -16,6 +16,7 @@ defineProps({
 
 <template>
   <MazCard
+    class="card"
     :elevation="false"
     :orientation="orientation || ''"
     :zoom="zoom || false"
@@ -23,7 +24,9 @@ defineProps({
     no-padding
   >
     <template v-if="title" #title>
-      <h2 style="margin: 0">{{ title }}</h2>
+      <div class="card__title">
+        <h2 style="margin: 0">{{ title }}</h2>
+      </div>
     </template>
     <template v-if="subtitle" #subtitle>
       <span> {{ subtitle }}} </span>
@@ -37,7 +40,7 @@ defineProps({
 <style scoped lang="scss">
 @import '/styles/variables.scss';
 
-:deep(.m-card__title) {
+.card__title {
   background: $patternBackground;
   background-size: $patternBackgroundSize;
   padding: 0.5em;

@@ -2,28 +2,32 @@
 import { Quest } from '.prisma/client';
 import { useQuests } from '~/stores/quest.store';
 import QuestDetail from '~/components/QuestDetail.vue';
+import { ListItemInterface } from '~/interfaces/list-item.interface';
 
-const { quests } = useQuests();
-const selectedQuest = ref<Quest>(quests[0]);
+const $quest = useQuests();
+const quests = computed(() =>
+  $quest.quests.map<ListItemInterface>((item) => ({
+    name: item.id,
+    title: item.title!,
+    nameClass: 'active'
+  }))
+);
+const selectedQuest = ref<Quest>();
+
+const setSelectedQuest = (id: string) => {
+  selectedQuest.value = $quest.quests.find((quest) => quest.id === id);
+};
 </script>
 
 <template>
-  <div class="quest-board card-wood">
-    <div class="quest-board__header separator">
-      <h1>Campaign</h1>
-    </div>
-    <div class="quest-board__list">
-      <div
-        v-for="quest of quests"
-        :key="quest.id!"
-        class="card-parchment mini"
-        @click="selectedQuest = quest"
-      >
-        <p>- {{ quest.title! }}</p>
+  <BaseCard title="Campaign">
+    <div class="quest-board">
+      <div class="quest-board__list">
+        <BaseList :list="quests" @on:click="setSelectedQuest" />
       </div>
+      <QuestDetail v-if="selectedQuest" :quest="selectedQuest" />
     </div>
-    <QuestDetail v-if="selectedQuest !== null" :quest="selectedQuest" />
-  </div>
+  </BaseCard>
 </template>
 
 <style scoped lang="scss">

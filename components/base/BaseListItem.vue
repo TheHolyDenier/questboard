@@ -1,42 +1,22 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
-import MazCard from 'maz-ui/components/MazCard';
 import { ListItemInterface } from '~/interfaces/list-item.interface';
-import BaseIcon from '~/components/base/BaseIcon.vue';
+import BaseListItemValue from '~/components/base/BaseListItemValue.vue';
 
 defineProps({
   item: { type: Object as PropType<ListItemInterface>, required: true }
 });
+
+defineEmits<{ (e: 'on:click', value: string): void }>();
 </script>
 
 <template>
-  <RouterLink v-if="item.to" :to="item.to">
-    <MazCard :elevation="false" orientation="row" bordered no-padding>
-      <template #title>
-        <h3>
-          <BaseIcon v-if="item.leadingIcon" :icon="item.leadingIcon" />
-          {{ item.title }}
-        </h3>
-      </template>
-      <template v-if="item.subtitle" #subtitle>
-        <span> {{ item.subtitle }} </span>
-      </template>
-      <template #content>
-        <slot></slot>
-      </template>
-    </MazCard>
-  </RouterLink>
-  <MazCard v-else :elevation="false" orientation="row" bordered>
-    <template #title>
-      <h2>{{ item.title }}</h2>
-    </template>
-    <template v-if="item.subtitle" #subtitle>
-      <span> {{ item.subtitle }} </span>
-    </template>
-    <template #content>
-      <slot></slot>
-    </template>
-  </MazCard>
+  <div :class="[item.nameClass]" @click="$emit('on:click', item.name)">
+    <RouterLink v-if="item.to" :to="item.to">
+      <BaseListItemValue :item="item" />
+    </RouterLink>
+    <BaseListItemValue v-else :item="item" />
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -49,7 +29,9 @@ defineProps({
   position: relative;
   background-color: $green-light;
 }
-a {
+
+a,
+.active {
   transition: transform 0.3s ease;
 
   &:hover {
