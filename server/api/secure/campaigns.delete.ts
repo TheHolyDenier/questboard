@@ -12,7 +12,7 @@ export default defineEventHandler(
     if (query && query.id) {
       const campaign = await CampaignsManager.findOne(user, String(query.id));
       if (campaign) {
-        prisma.campaign.delete({ where: { id: String(query.id) } });
+        await prisma.campaign.delete({ where: { id: String(query.id) } });
       }
     }
 

@@ -22,12 +22,17 @@ export const useCampaign = defineStore('campaign', () => {
     selectedCampaign.value = await api.campaign.getOne(id);
   };
 
+  const remove = async (id: string) => {
+    await api.campaign.delete(id);
+  };
+
   return {
     campaigns,
     selectedCampaign,
     create,
     get,
     getOne,
+    remove,
     refresh,
     needsRefresh
   };

@@ -8,6 +8,7 @@ definePageMeta({
 });
 
 const route = useRoute();
+const router = useRouter();
 const $campaign = useCampaign();
 
 const id = computed(() => String(route.params.id));
@@ -16,6 +17,11 @@ const { selectedCampaign } = storeToRefs($campaign);
 onMounted(() => {
   $campaign.getOne(id.value);
 });
+
+const remove = async () => {
+  await $campaign.remove(id.value);
+  await router.replace({ name: 'campaign-list' });
+};
 
 watch(
   () => $campaign.needsRefresh,
@@ -32,7 +38,7 @@ watch(
   <div v-if="selectedCampaign">
     <h1>
       {{ selectedCampaign.title }}
-      <BaseButton leading-icon="bone-bite" label="Delete" />
+      <DeleteButton @on:delete="remove" />
     </h1>
 
     <QuestBoard />

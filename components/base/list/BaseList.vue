@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
 import { ListItemInterface } from '~/interfaces/list-item.interface';
-import BaseListItem from '~/components/base/BaseListItem.vue';
+import BaseListItem from '~/components/base/list/BaseListItem.vue';
 
 defineProps({
   list: { type: Array as PropType<ListItemInterface[]>, default: () => [] }
