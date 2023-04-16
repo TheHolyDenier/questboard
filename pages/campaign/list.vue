@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCampaign } from '~/stores/campaign.store';
 import CampaignForm from '~/components/CampaignForm.vue';
+import { ListItemInterface } from '~/interfaces/list-item.interface';
 
 definePageMeta({
   middleware: 'auth'
@@ -8,11 +9,12 @@ definePageMeta({
 
 const $campaign = useCampaign();
 const campaigns = computed(() =>
-  $campaign.campaigns.map((campaign) => ({
+  $campaign.campaigns.map<ListItemInterface>((campaign) => ({
     name: campaign.id,
     title: campaign.title,
-    subtitle: campaign.summary,
-    to: { name: 'campaign-id', params: { id: campaign.id } }
+    subtitle: campaign.summary || undefined,
+    to: { name: 'campaign-id', params: { id: campaign.id } },
+    leadingIcon: 'pawn'
   }))
 );
 

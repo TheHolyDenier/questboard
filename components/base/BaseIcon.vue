@@ -8,26 +8,29 @@ const props = defineProps({
   color: {
     type: String as PropType<ColorType>,
     default: 'primary'
-  }
+  },
+  size: { type: String, default: '16px' }
 });
 
 const src = `/icons/${props.icon}.svg`;
 </script>
 
 <template>
-  <div
+  <span
     class="icon"
     :style="{
       backgroundColor: `var(--maz-color-${props.color})`,
       '-webkit-mask': `url(${src}) no-repeat center / contain`,
-      mask: `url(${src}) no-repeat center / contain`
+      mask: `url(${src}) no-repeat center / contain`,
+      width: props.size,
+      height: props.size
     }"
-  ></div>
+  ></span>
 </template>
 
 <style scoped lang="scss">
 .icon {
-  width: 12px;
-  height: 12px;
+  display: inline-block;
+  padding: 0.3em;
 }
 </style>

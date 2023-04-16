@@ -1,5 +1,6 @@
 import { H3Event } from 'h3';
 import { Campaign } from '@prisma/client';
+import { plainToInstance } from 'class-transformer';
 import { ApiResponse } from '~/interfaces/api-response';
 import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 import { prisma } from '~/server/api';
@@ -12,7 +13,7 @@ export default defineEventHandler(
 
     const campaign = await prisma.campaign.create({
       data: {
-        ...CreateCampaignDto.create(body),
+        ...plainToInstance(CreateCampaignDto, body),
         createdById: user.id,
         createdAt: new Date(),
         updatedAt: new Date()

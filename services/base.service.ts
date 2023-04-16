@@ -61,4 +61,16 @@ export class BaseService<T, C = null, U = null> {
 
     return plainToInstance(this.Dto, (result as ApiResponse<T>).data);
   }
+
+  async delete(id: string): Promise<void> {
+    const user = useUser();
+
+    await $fetch(`${this.baseUrl}?id=${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: user.token()
+      }
+    });
+  }
 }

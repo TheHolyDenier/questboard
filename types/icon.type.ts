@@ -1,1 +1,1 @@
-export type IconType = 'monster-skull';
+export type IconType = 'pawn' | 'bone-bite';
