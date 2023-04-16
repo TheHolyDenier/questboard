@@ -2,7 +2,7 @@
 import { InputDefinitionInterface } from '~/interfaces/input-definition.interface';
 import BaseForm from '~/components/base/form/BaseForm.vue';
 import { useUser } from '~/stores/user.store';
-import { InputEventInterface } from '~/interfaces/input-event.interface';
+import { FormDataInterface } from '~/interfaces/form-data.interface';
 
 definePageMeta({
   middleware: 'unsign',
@@ -17,11 +17,13 @@ const inputDefinitions: InputDefinitionInterface[] = [
   { name: 'password', label: 'Password', required: true, type: 'password' }
 ];
 
-const signUp = async (signUp: InputEventInterface) => await user.signUp(signUp);
+const signUp = async (signUp: FormDataInterface) => {
+  await user.signUp(signUp);
+};
 </script>
 
 <template>
-  <div class="signup-form card-wood" @submit.prevent="submit">
+  <div class="signup-form card-wood">
     <h1 class="form-title">Sign Up</h1>
 
     <BaseForm

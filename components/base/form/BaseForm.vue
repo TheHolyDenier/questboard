@@ -15,7 +15,7 @@ defineProps({
 
 const emit = defineEmits<{
   (e: 'on:change', dataForm: FormDataInterface): void;
-  (e: 'on:submit', dataForm: FormDataInterface): void;
+  (e: 'on:submit', dataForm: FormDataInterface): Promise<void>;
 }>();
 
 const inputValues = reactive<InputEventInterface[]>([]);

@@ -3,16 +3,23 @@
 
 @font-face {
   font-family: 'IM Fell English';
-  src: url('/fonts/IMFellEnglish-Regular.ttf') format('truetype');
+  src: url('public/fonts/IMFellEnglish-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'IM Fell English';
-  src: url('/fonts/IMFellEnglish-Italic.ttf') format('truetype');
+  src: url('public/fonts/IMFellEnglish-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
+}
+
+@font-face {
+  font-family: 'PirataOne';
+  src: url('public/fonts/PirataOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 *,
@@ -40,6 +47,10 @@
 
 }
 
+h1, h2, h3, h4,h5, h6 {
+  font-family: 'PirataOne', serif;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -48,7 +59,7 @@ a {
 .card-wood {
   max-width: 1000px;
   background-color: $background;
-  background-image: url("/img/dark-wood.png");
+  background-image: url("public/img/dark-wood.png");
   padding: 1.5em;
   color: $primary !important;
   position:relative;
@@ -87,6 +98,14 @@ a {
 
   &.mini {
     box-shadow: 2px 3px 10px black, 0 0 30px #8f5922 inset;
+    transition: transform 0.3s ease;
+    padding: 0.5em;
+    margin: 1em;
+
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
   }
 }
 

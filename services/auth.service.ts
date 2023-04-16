@@ -3,11 +3,9 @@ import { SignInDto } from '~/domain/auth/sign-in.dto';
 import { SignUpDto } from '~/domain/auth/sign-up.dto';
 import { ApiResponse } from '~/interfaces/api-response';
 import { getQueryParams } from '~/utils/query-params';
-import { InputEventInterface } from '~/interfaces/input-event.interface';
+import { FormDataInterface } from '~/interfaces/form-data.interface';
 
 export class AuthService {
-  constructor() {}
-
   async signIn(body: SignInDto): Promise<User> {
     const result: ApiResponse<User> = await $fetch(
       `/api/auth?${getQueryParams(body)}`,
@@ -22,7 +20,7 @@ export class AuthService {
     return result.data as User;
   }
 
-  async signUp(body: InputEventInterface): Promise<User> {
+  async signUp(body: FormDataInterface): Promise<User> {
     const result: ApiResponse<User> = await $fetch('/api/auth', {
       method: 'POST',
       headers: {

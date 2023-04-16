@@ -4,6 +4,7 @@ import { api } from '~/plugins/di';
 import { LocalStorageService } from '~/services/local-storage.service';
 import { UpdateUserDto } from '~/domain/users/update-user.dto';
 import { InputEventInterface } from '~/interfaces/input-event.interface';
+import { FormDataInterface } from '~/interfaces/form-data.interface';
 
 export const useUser = defineStore('user', () => {
   const localKey = 'accessToken';
@@ -31,7 +32,7 @@ export const useUser = defineStore('user', () => {
     LocalStorageService.set(localKey, me.value.accessToken!);
   };
 
-  const signUp = async (body: InputEventInterface) => {
+  const signUp = async (body: FormDataInterface) => {
     me.value = await api.auth.signUp(body);
     LocalStorageService.set(localKey, me.value.accessToken!);
   };

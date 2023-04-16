@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
-import { QuestDto } from '~/domain/quests/quest.dto';
+import { Quest } from '.prisma/client';
 
-defineProps({ quest: { type: Object as PropType<QuestDto>, required: true } });
+defineProps({ quest: { type: Object as PropType<Quest>, required: true } });
 </script>
 
 <template>

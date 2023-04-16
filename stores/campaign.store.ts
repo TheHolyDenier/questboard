@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon';
 import { Campaign } from '@prisma/client';
+import { api } from '~/plugins/di';
+import { FormDataInterface } from '~/interfaces/form-data.interface';
 
 const campaigns: Campaign[] = [
   {
@@ -27,7 +29,11 @@ const campaigns: Campaign[] = [
 ];
 
 export const useCampaign = defineStore('campaign', () => {
+  const create = (body: FormDataInterface) => {
+    return api.campaign.create(body);
+  };
   return {
+    create,
     campaigns
   };
 });
