@@ -13,7 +13,7 @@ defineProps({
   <RouterLink v-if="item.to" :to="item.to">
     <MazCard :elevation="false" orientation="row" bordered no-padding>
       <template #title>
-        <BaseIcon />
+        <BaseIcon icon="monster-skull" />
         <h3>{{ item.title }}</h3>
       </template>
       <template v-if="item.subtitle" #subtitle>

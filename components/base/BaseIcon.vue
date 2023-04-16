@@ -1,13 +1,33 @@
 <script setup lang="ts">
-import MazIcon from 'maz-ui/components/MazIcon';
+import { PropType } from 'vue';
+import { IconType } from '~/types/icon.type';
+import { ColorType } from '~/types/color.type';
 
-const iconNames = ['icons/monster-skull'];
+const props = defineProps({
+  icon: { type: String as PropType<IconType>, required: true },
+  color: {
+    type: String as PropType<ColorType>,
+    default: 'primary'
+  }
+});
+
+const src = `/icons/${props.icon}.svg`;
 </script>
 
 <template>
-  <span v-for="icon in iconNames" :key="icon">
-    <MazIcon :name="icon" size="1em" />
-  </span>
+  <div
+    class="icon"
+    :style="{
+      backgroundColor: `var(--maz-color-${props.color})`,
+      '-webkit-mask': `url(${src}) no-repeat center / contain`,
+      mask: `url(${src}) no-repeat center / contain`
+    }"
+  ></div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.icon {
+  width: 12px;
+  height: 12px;
+}
+</style>

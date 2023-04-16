@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MazBtn from 'maz-ui/components/MazBtn';
 import { PropType } from 'vue';
+import { ColorType } from '~/types/color.type';
 
 defineProps({
   to: { type: Object, default: null },
@@ -11,17 +12,7 @@ defineProps({
     default: 'md'
   },
   color: {
-    type: String as PropType<
-      | 'primary'
-      | 'secondary'
-      | 'info'
-      | 'success'
-      | 'warning'
-      | 'danger'
-      | 'white'
-      | 'black'
-      | 'transparent'
-    >,
+    type: String as PropType<ColorType>,
     default: 'primary'
   },
   outline: { type: Boolean, default: false },
