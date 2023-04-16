@@ -16,11 +16,9 @@ const create = async (create: FormDataInterface) => {
 </script>
 
 <template>
-  <div class="card-wood">
-    <h1>Create campaign</h1>
-
+  <BaseCard title="Create campaign">
     <BaseForm :input-definitions="inputDefinitions" @on:submit="create" />
-  </div>
+  </BaseCard>
 </template>
 
 <style scoped lang="scss"></style>

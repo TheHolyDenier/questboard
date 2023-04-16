@@ -1,40 +1,46 @@
-$primary: #f9c9b6;
-$secondary: #b6e6f9;
-$gray: #333333;
-$gray-light: #8c8c8c;
-$background: #39271b;
-$background-light: #f8d89a;
+$primary: #e63946;
+$secondary: #a8dadc;
+$blue: #1d3557;
+$blue-light: #457b9d;
+$green: #f1faee;
+$green-light: #fdfefd;
+
+$patternBackground:   radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, $primary 10px, rgba(96, 16, 48, 0) 11px) 0px 10px,
+radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, $primary 10px, rgba(96, 16, 48, 0) 11px),
+$secondary;
+$patternBackgroundSize: 20px 20px;
+$patternBackgroundContrast: $blue;
 
 :root {
   /* PRIMARY */
-  --maz-color-primary-50: #fef8f6;
-  --maz-color-primary-100: #fdefe9;
-  --maz-color-primary-200: #fce5dc;
-  --maz-color-primary-300: #fbdcd0;
-  --maz-color-primary-400: #fad2c3;
-  --maz-color-primary: #f9c9b6;
-  --maz-color-primary-600: #cda696;
-  --maz-color-primary-700: #a28376;
-  --maz-color-primary-800: #765f56;
-  --maz-color-primary-900: #4b3c37;
-  --maz-color-primary-contrast: #1f1917;
-  --maz-color-primary-alpha: rgba(249, 201, 182, 0.8);
-  --maz-color-primary-alpha-20: rgba(249, 201, 182, 0.2);
+  --maz-color-primary-50: #fce6e8;
+  --maz-color-primary-100: #f8c4c8;
+  --maz-color-primary-200: #f3a1a7;
+  --maz-color-primary-300: #ef7e87;
+  --maz-color-primary-400: #ea5c66;
+  --maz-color-primary: $primary;
+  --maz-color-primary-600: #be2f3a;
+  --maz-color-primary-700: #96252e;
+  --maz-color-primary-800: #96252e;
+  --maz-color-primary-900: #6d1b21;
+  --maz-color-primary-contrast: $green;
+  --maz-color-primary-alpha: rgba($primary, 0.8);
+  --maz-color-primary-alpha-20: rgba($primary, 0.2);
 
   /* SECONDARY */
-  --maz-color-secondary-50: #f6fcfe;
-  --maz-color-secondary-100: #e9f8fd;
-  --maz-color-secondary-200: #dcf3fc;
-  --maz-color-secondary-300: #d0effb;
-  --maz-color-secondary-400: #c3eafa;
-  --maz-color-secondary: #b6e6f9;
-  --maz-color-secondary-600: #96becd;
-  --maz-color-secondary-700: #7696a2;
-  --maz-color-secondary-800: #566d76;
-  --maz-color-secondary-900: #37454b;
-  --maz-color-secondary-contrast: #171d1f;
-  --maz-color-secondary-alpha: rgba(182, 230, 249, 0.5);
-  --maz-color-secondary-alpha-20: rgba(182, 230, 249, 0.2);
+  --maz-color-secondary-50: #f4fafb;
+  --maz-color-secondary-100: #e5f4f5;
+  --maz-color-secondary-200: #d6edee;
+  --maz-color-secondary-300: #c6e7e8;
+  --maz-color-secondary-400: #b7e0e2;
+  --maz-color-secondary: $secondary;
+  --maz-color-secondary-600: #8bb4b6;
+  --maz-color-secondary-700: #8bb4b6;
+  --maz-color-secondary-800: #6d8e8f;
+  --maz-color-secondary-900: #506869;
+  --maz-color-secondary-contrast: $blue;
+  --maz-color-secondary-alpha: rgba($secondary, 0.5);
+  --maz-color-secondary-alpha-20: rgba($secondary, 0.2);
 
   /* INFO */
   --maz-color-info-50: hsl(188deg 53% 93%);
@@ -97,12 +103,12 @@ $background-light: #f8d89a;
   --maz-color-danger-alpha-20: hsl(1deg 100% 71% / 20%);
 
   /* WHITE */
-  --maz-color-white: hsl(0deg 0% 100%);
-  --maz-color-white-contrast: hsl(0deg 0% 0%);
+  --maz-color-white: $green;
+  --maz-color-white-contrast: $blue;
 
   /* BLACK */
-  --maz-color-black: hsl(0deg 0% 0%);
-  --maz-color-black-contrast: hsl(0deg 0% 100%);
+  --maz-color-black: $blue;
+  --maz-color-black-contrast: $green;
 
   /** TEXT COLOR LIGHT **/
   --maz-color-text-light: hsl(0deg 0% 85%);
