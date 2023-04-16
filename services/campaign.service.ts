@@ -4,10 +4,11 @@ import { CreateCampaignDto } from '~/domain/campaigns/create-campaign.dto';
 import { FormDataInterface } from '~/interfaces/form-data.interface';
 
 export class CampaignService {
+  readonly baseUrl = '/api/secure/campaigns';
   async create(body: FormDataInterface): Promise<Campaign> {
     const user = useUser();
 
-    const result = await $fetch('/api/secure/campaigns', {
+    const result = await $fetch(this.baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -17,5 +18,19 @@ export class CampaignService {
     });
 
     return result.data as Campaign;
+  }
+
+  async get(): Promise<Campaign[]> {
+    const user = useUser();
+
+    const result = await $fetch(this.baseUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: user.token()
+      }
+    });
+
+    return result.data as Campaign[];
   }
 }

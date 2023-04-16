@@ -13,6 +13,7 @@ const id = computed(() => route.params.id);
 <template>
   <div>
     <h1>{{ id }}</h1>
+    <QuestBoard />
   </div>
 </template>
 

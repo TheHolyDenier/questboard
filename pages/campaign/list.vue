@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Campaign } from '@prisma/client';
 import { useCampaign } from '~/stores/campaign.store';
 import CampaignForm from '~/components/CampaignForm.vue';
 
@@ -7,7 +8,14 @@ definePageMeta({
   layout: 'default'
 });
 
-const { campaigns } = useCampaign();
+const $campaign = useCampaign();
+const campaigns = ref<Campaign[]>([]);
+
+watch(
+  () => $campaign.needsRefresh,
+  async () => (campaigns.value = await $campaign.get()),
+  { immediate: true }
+);
 </script>
 
 <template>
