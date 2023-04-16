@@ -31,17 +31,7 @@ watch(
     <h1 class="campaigns__title">Campaigns</h1>
     <div class="campaigns__container">
       <div class="campaigns__container__list">
-        <!--        <div-->
-        <!--          v-for="campaign of campaigns"-->
-        <!--          :key="campaign.id"-->
-        <!--          class="card-parchment mini campaigns__container__list__item"-->
-        <!--        >-->
-        <!--          <RouterLink-->
-        <!--            :to="{ name: 'campaign-id', params: { id: campaign.id } }"-->
-        <!--          >-->
         <BaseList :list="campaigns" />
-        <!--          </RouterLink>-->
-        <!--        </div>-->
       </div>
       <CampaignForm />
     </div>
