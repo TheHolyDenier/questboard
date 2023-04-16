@@ -11,6 +11,30 @@ $secondary;
 $patternBackgroundSize: 20px 20px;
 $patternBackgroundContrast: $blue;
 
+
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('public/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'PoiretOne';
+  src: url('public/fonts/PoiretOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$poiretFont: 'PoiretOne', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+roboto, oxygen, ubuntu, cantarell, 'Fira Sans', 'Droid Sans',
+'Helvetica Neue', sans-serif;
+
+$bebasNeueFont: 'BebasNeue', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+roboto, oxygen, ubuntu, cantarell, 'Fira Sans', 'Droid Sans',
+'Helvetica Neue', sans-serif;
+
 :root {
   /* PRIMARY */
   --maz-color-primary-50: #fce6e8;
@@ -18,14 +42,14 @@ $patternBackgroundContrast: $blue;
   --maz-color-primary-200: #f3a1a7;
   --maz-color-primary-300: #ef7e87;
   --maz-color-primary-400: #ea5c66;
-  --maz-color-primary: $primary;
+  --maz-color-primary: #e63946;
   --maz-color-primary-600: #be2f3a;
   --maz-color-primary-700: #96252e;
   --maz-color-primary-800: #96252e;
   --maz-color-primary-900: #6d1b21;
-  --maz-color-primary-contrast: $green;
-  --maz-color-primary-alpha: rgba($primary, 0.8);
-  --maz-color-primary-alpha-20: rgba($primary, 0.2);
+  --maz-color-primary-contrast: #f1faee;
+  --maz-color-primary-alpha: rgba(230,57,70 , 0.8);
+  --maz-color-primary-alpha-20: rgba(230,57,70, 0.2);
 
   /* SECONDARY */
   --maz-color-secondary-50: #f4fafb;
@@ -33,14 +57,14 @@ $patternBackgroundContrast: $blue;
   --maz-color-secondary-200: #d6edee;
   --maz-color-secondary-300: #c6e7e8;
   --maz-color-secondary-400: #b7e0e2;
-  --maz-color-secondary: $secondary;
+  --maz-color-secondary: #a8dadc;
   --maz-color-secondary-600: #8bb4b6;
   --maz-color-secondary-700: #8bb4b6;
   --maz-color-secondary-800: #6d8e8f;
   --maz-color-secondary-900: #506869;
-  --maz-color-secondary-contrast: $blue;
-  --maz-color-secondary-alpha: rgba($secondary, 0.5);
-  --maz-color-secondary-alpha-20: rgba($secondary, 0.2);
+  --maz-color-secondary-contrast: #1d3557;
+  --maz-color-secondary-alpha: rgba(168, 218, 220, 0.5);
+  --maz-color-secondary-alpha-20: rgba(168, 218, 220, 0.2);
 
   /* INFO */
   --maz-color-info-50: hsl(188deg 53% 93%);
@@ -145,7 +169,7 @@ $patternBackgroundContrast: $blue;
   * FONT FAMILY
   * Not used in the library --> Use this variable on your <html> element (optional)
   **/
-  --maz-font-family: system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+  --maz-font-family: 'PoiretOne', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
   roboto, oxygen, ubuntu, cantarell, 'Fira Sans', 'Droid Sans',
   'Helvetica Neue', sans-serif;
 }

@@ -1,18 +1,36 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useCampaign } from '~/stores/campaign.store';
 
 definePageMeta({
   middleware: 'auth'
 });
 
 const route = useRoute();
+const $campaign = useCampaign();
 
-const id = computed(() => route.params.id);
+const id = computed(() => String(route.params.id));
+const { selectedCampaign } = storeToRefs($campaign);
+
+onMounted(() => {
+  $campaign.getOne(id.value);
+});
+
+watch(
+  () => $campaign.needsRefresh,
+  () => $campaign.getOne(id.value)
+);
+
+watch(
+  () => id.value,
+  () => $campaign.getOne(id.value)
+);
 </script>
 
 <template>
-  <div>
-    <h1>{{ id }}</h1>
+  <div v-if="selectedCampaign">
+    <h1>{{ selectedCampaign.title }}</h1>
     <QuestBoard />
   </div>
 </template>

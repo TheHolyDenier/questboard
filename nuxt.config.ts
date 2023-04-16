@@ -4,11 +4,7 @@ dotenv.config();
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  css: [
-    'maz-ui/css/main.css',
-    '~/settings.scss',
-    '@mdi/font/css/materialdesignicons.css'
-  ],
+  css: ['maz-ui/css/main.css', '~/settings.scss'],
   vite: {
     ssr: {
       noExternal: []

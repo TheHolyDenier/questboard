@@ -33,4 +33,18 @@ export class CampaignService {
 
     return result.data as Campaign[];
   }
+
+  async getOne(id: string): Promise<Campaign> {
+    const user = useUser();
+
+    const result = await $fetch(`${this.baseUrl}?id=${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: user.token()
+      }
+    });
+
+    return result.data as Campaign;
+  }
 }

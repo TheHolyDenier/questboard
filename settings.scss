@@ -1,26 +1,6 @@
 @import "/styles/variables.scss";
 
 
-@font-face {
-  font-family: 'IM Fell English';
-  src: url('public/fonts/IMFellEnglish-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'IM Fell English';
-  src: url('public/fonts/IMFellEnglish-Italic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'PirataOne';
-  src: url('public/fonts/PirataOne-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
 
 *,
 *::before,
@@ -29,8 +9,6 @@
   margin: 0;
   position: relative;
   font-weight: normal;
-  font-family: 'IM Fell English', serif;
-
 }
 
 
@@ -43,12 +21,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
-  color: $blue;
-
 }
 
 h1, h2, h3, h4,h5, h6 {
-  font-family: 'PirataOne', serif;
+  font-family: $bebasNeueFont;
 }
 
 a {

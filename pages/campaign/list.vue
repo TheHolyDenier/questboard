@@ -33,7 +33,9 @@ watch(
       <div class="campaigns__container__list">
         <BaseList :list="campaigns" />
       </div>
-      <CampaignForm />
+      <div>
+        <CampaignForm />
+      </div>
     </div>
   </div>
 </template>

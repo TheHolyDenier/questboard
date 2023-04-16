@@ -8,7 +8,7 @@ defineProps({
   loading: { type: Boolean, default: false },
   size: {
     type: String as PropType<'mini' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'>,
-    default: 'xs'
+    default: 'md'
   },
   color: {
     type: String as PropType<
@@ -25,7 +25,6 @@ defineProps({
     default: 'primary'
   },
   outline: { type: Boolean, default: false },
-  pastel: { type: Boolean, default: false },
   rounded: { type: Boolean, default: false },
   circle: { type: Boolean, default: false },
   fullWidth: { type: Boolean, default: false },
@@ -34,26 +33,33 @@ defineProps({
 </script>
 
 <template>
-  <MazBtn
-    :to="to"
-    :loading="loading"
-    :size="size"
-    :color="color"
-    :outline="outline"
-    :pastel="pastel"
-    :fab="circle"
-    :rounded="rounded"
-    :block="fullWidth"
-    :disabled="disabled"
-  >
-    {{ label }}
-    <template #left-icon>
-      <slot name="left-icon"></slot>
-    </template>
-    <template #right-icon>
-      <slot name="right-icon"></slot>
-    </template>
-  </MazBtn>
+  <span class="button">
+    <MazBtn
+      :to="to"
+      :loading="loading || false"
+      :size="size || 'md'"
+      :color="color || 'primary'"
+      :outline="outline || false"
+      :fab="circle || false"
+      :rounded="rounded || false"
+      :block="fullWidth || false"
+      :disabled="disabled || false"
+    >
+      {{ label }}
+      <template #left-icon>
+        <slot name="left-icon"></slot>
+      </template>
+      <template #right-icon>
+        <slot name="right-icon"></slot>
+      </template>
+    </MazBtn>
+  </span>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import 'styles/variables.scss';
+
+.button {
+  font-family: $bebasNeueFont !important;
+}
+</style>
