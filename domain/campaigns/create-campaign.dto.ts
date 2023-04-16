@@ -1,4 +1,4 @@
-import { Expose, plainToInstance } from 'class-transformer';
+import { Expose } from 'class-transformer';
 
 export class CreateCampaignDto {
   @Expose()
@@ -6,10 +6,4 @@ export class CreateCampaignDto {
 
   @Expose()
   summary?: string;
-
-  static create(data: any): CreateCampaignDto {
-    return plainToInstance(CreateCampaignDto, data, {
-      excludeExtraneousValues: true
-    });
-  }
 }
