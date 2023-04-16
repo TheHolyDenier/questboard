@@ -1,8 +1,10 @@
+import { Campaign } from '@prisma/client';
 import { api } from '~/plugins/di';
 import { FormDataInterface } from '~/interfaces/form-data.interface';
 
 export const useCampaign = defineStore('campaign', () => {
-  const needsRefresh = ref(Date.now());
+  const needsRefresh = ref<number>(Date.now());
+  const campaigns = ref<Campaign[]>([]);
 
   const refresh = () => (needsRefresh.value = Date.now());
   const create = async (body: FormDataInterface) => {
@@ -12,10 +14,11 @@ export const useCampaign = defineStore('campaign', () => {
   };
 
   const get = async () => {
-    return await api.campaign.get();
+    campaigns.value = await api.campaign.get();
   };
 
   return {
+    campaigns,
     create,
     get,
     refresh,

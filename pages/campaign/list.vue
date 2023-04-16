@@ -1,20 +1,23 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import { Campaign } from '@prisma/client';
 import { useCampaign } from '~/stores/campaign.store';
 import CampaignForm from '~/components/CampaignForm.vue';
 
 definePageMeta({
-  middleware: 'auth',
-  layout: 'default'
+  middleware: 'auth'
 });
 
 const $campaign = useCampaign();
-const campaigns = ref<Campaign[]>([]);
+const { campaigns } = storeToRefs($campaign);
+
+onMounted(() => {
+  $campaign.get();
+});
 
 watch(
   () => $campaign.needsRefresh,
-  async () => (campaigns.value = await $campaign.get()),
-  { immediate: true }
+  () => $campaign.get()
 );
 </script>
 
@@ -26,7 +29,7 @@ watch(
         <div
           v-for="campaign of campaigns"
           :key="campaign.id"
-          class="card-parchment mini"
+          class="card-parchment mini campaigns__container__list__item"
         >
           <RouterLink
             :to="{ name: 'campaign-id', params: { id: campaign.id } }"
@@ -57,6 +60,12 @@ watch(
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
+    justify-content: center;
+
+    &__list {
+      flex: 1;
+      min-width: 40vw;
+    }
   }
 }
 </style>

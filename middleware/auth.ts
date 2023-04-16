@@ -4,6 +4,6 @@ export default defineNuxtRouteMiddleware(() => {
   const user = useUser();
 
   if (process.client && !user.isAuthenticated()) {
-    return navigateTo('/sign-in');
+    return navigateTo('/');
   }
 });
