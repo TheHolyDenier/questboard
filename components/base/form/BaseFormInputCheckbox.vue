@@ -8,8 +8,11 @@ const props = defineProps({
   inputDefinition: {
     type: Object as PropType<InputDefinitionInterface>,
     required: true
-  }
+  },
+  model: { type: Boolean }
 });
+
+const inputValue = ref(props.model);
 
 const emit = defineEmits<{
   (e: 'on:change', inputEvent: InputEventInterface): void;
@@ -24,8 +27,6 @@ watch(
     });
   }
 );
-
-const inputValue = ref(false);
 </script>
 
 <template>

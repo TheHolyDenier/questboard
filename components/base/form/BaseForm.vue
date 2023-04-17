@@ -10,6 +10,7 @@ defineProps({
     type: Array as PropType<InputDefinitionInterface[]>,
     default: () => []
   },
+  model: { type: Object, default: null },
   okButtonLabel: { type: String, default: 'Save' },
   cancelButtonLabel: { type: String, default: 'Cancel' },
   cancelAction: { type: Boolean }
@@ -50,6 +51,7 @@ const submit = () => emit('on:submit', formData.value);
       v-for="inputDefinition of inputDefinitions"
       :key="inputDefinition.name"
       :input-definition="inputDefinition"
+      :model="model?.[inputDefinition.name]"
       @on:change="updateDataForm"
     />
     <div class="form__actions">

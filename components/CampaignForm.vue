@@ -24,15 +24,16 @@ const updateInputDefinitions: InputDefinitionInterface[] = [
   { name: 'isFavorite', label: 'Is favorite?', type: 'checkbox' }
 ];
 
-const campaign = useCampaign();
+const $campaign = useCampaign();
 const create = async (create: FormDataInterface) => {
-  return await campaign.create(create);
+  return await $campaign.create(create);
 };
 </script>
 
 <template>
   <BaseCard title="Create campaign">
     <BaseForm
+      :model="campaign"
       :input-definitions="
         campaign ? updateInputDefinitions : createInputDefinitions
       "

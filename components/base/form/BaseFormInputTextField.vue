@@ -8,14 +8,16 @@ const props = defineProps({
   inputDefinition: {
     type: Object as PropType<InputDefinitionInterface>,
     required: true
-  }
+  },
+  model: { type: [String, Number], default: null }
 });
 
 const emit = defineEmits<{
   (e: 'on:change', inputEvent: InputEventInterface): void;
 }>();
 
-const inputValue = ref('');
+const inputValue = ref(props.model ? String(props.model) : '');
+
 const error = ref(false);
 const errorMessage = ref<string | null>(null);
 

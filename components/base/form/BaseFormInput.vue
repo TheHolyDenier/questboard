@@ -7,7 +7,8 @@ defineProps({
   inputDefinition: {
     type: Object as PropType<InputDefinitionInterface>,
     required: true
-  }
+  },
+  model: { type: [String, Number, Boolean], default: null }
 });
 
 const emit = defineEmits<{
@@ -19,11 +20,13 @@ const emit = defineEmits<{
   <BaseFormInputCheckbox
     v-if="inputDefinition.type === 'checkbox'"
     :input-definition="inputDefinition"
+    :model="!!model"
     @on:change="emit('on:change', $event)"
   />
   <BaseFormInputTextField
     v-else
     :input-definition="inputDefinition"
+    :model="model"
     @on:change="emit('on:change', $event)"
   />
 </template>
