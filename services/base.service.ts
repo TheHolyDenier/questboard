@@ -35,7 +35,7 @@ export class BaseService<T, C = null, U = null> {
   async update(id: string, body: FormDataInterface): Promise<T> {
     const user = useUser();
 
-    const result = await $fetch(`${this.baseUrl}?id=${id}`, {
+    const result = await $fetch(`${this.baseUrl}/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export class BaseService<T, C = null, U = null> {
   async getOne(id: string): Promise<T> {
     const user = useUser();
 
-    const result = await $fetch(`${this.baseUrl}?id=${id}`, {
+    const result = await $fetch(`${this.baseUrl}/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export class BaseService<T, C = null, U = null> {
   async delete(id: string): Promise<void> {
     const user = useUser();
 
-    await $fetch(`${this.baseUrl}?id=${id}`, {
+    await $fetch(`${this.baseUrl}/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
