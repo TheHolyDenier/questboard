@@ -15,6 +15,8 @@ const $campaign = useCampaign();
 const id = computed(() => String(route.params.id));
 const { selectedCampaign } = storeToRefs($campaign);
 
+const editing = ref(true);
+
 onMounted(() => {
   $campaign.getOne(id.value);
 });
@@ -42,8 +44,14 @@ watch(
         {{ selectedCampaign.title }}
       </h1>
       <DeleteButton @on:delete="remove" />
-      <EditButton />
+      <EditButton @click="editing = true" />
     </div>
+
+    <CampaignForm
+      v-if="editing"
+      :campaign="selectedCampaign"
+      @on:cancel="editing = false"
+    />
   </div>
 </template>
 

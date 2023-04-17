@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType, ref } from 'vue';
+import MazCheckbox from 'maz-ui/components/MazCheckbox';
 import { InputDefinitionInterface } from '~/interfaces/input-definition.interface';
 import { InputEventInterface } from '~/interfaces/input-event.interface';
 
-defineProps({
+const props = defineProps({
   inputDefinition: {
     type: Object as PropType<InputDefinitionInterface>,
     required: true
@@ -13,19 +14,24 @@ defineProps({
 const emit = defineEmits<{
   (e: 'on:change', inputEvent: InputEventInterface): void;
 }>();
+
+watch(
+  () => inputValue.value,
+  () => {
+    emit('on:change', {
+      name: props.inputDefinition.name,
+      value: inputValue.value
+    });
+  }
+);
+
+const inputValue = ref(false);
 </script>
 
 <template>
-  <BaseFormInputCheckbox
-    v-if="inputDefinition.type === 'checkbox'"
-    :input-definition="inputDefinition"
-    @on:change="emit('on:change', $event)"
-  />
-  <BaseFormInputTextField
-    v-else
-    :input-definition="inputDefinition"
-    @on:change="emit('on:change', $event)"
-  />
+  <MazCheckbox v-model="inputValue" :name="inputDefinition.name">
+    {{ inputDefinition.label }}
+  </MazCheckbox>
 </template>
 
 <style scoped lang="scss"></style>

@@ -10,12 +10,15 @@ defineProps({
     type: Array as PropType<InputDefinitionInterface[]>,
     default: () => []
   },
-  okButtonLabel: { type: String, default: 'Save' }
+  okButtonLabel: { type: String, default: 'Save' },
+  cancelButtonLabel: { type: String, default: 'Cancel' },
+  cancelAction: { type: Boolean }
 });
 
 const emit = defineEmits<{
   (e: 'on:change', dataForm: FormDataInterface): void;
   (e: 'on:submit', dataForm: FormDataInterface): Promise<void>;
+  (e: 'on:cancel'): void;
 }>();
 
 const inputValues = reactive<InputEventInterface[]>([]);
@@ -50,6 +53,12 @@ const submit = () => emit('on:submit', formData.value);
       @on:change="updateDataForm"
     />
     <div class="form__actions">
+      <BaseButton
+        v-if="cancelAction"
+        :label="cancelButtonLabel"
+        color="transparent"
+        @click="emit('on:cancel')"
+      />
       <BaseButton :label="okButtonLabel" @click="submit" />
     </div>
   </div>

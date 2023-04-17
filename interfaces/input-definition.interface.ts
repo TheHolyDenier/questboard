@@ -1,7 +1,7 @@
 export interface InputDefinitionInterface {
   name: string;
   label: string;
-  type?: 'text' | 'password';
+  type?: 'text' | 'password' | 'checkbox';
   required?: boolean;
   disabled?: boolean;
   readonly?: boolean;
