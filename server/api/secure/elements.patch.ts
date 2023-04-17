@@ -13,14 +13,14 @@ export default defineEventHandler(
 
     const body = await readBody(event);
 
-    const campaign = await ElementsManager.findOne(user, String(query.id));
+    const elements = await ElementsManager.findOne(user, String(query.id));
 
-    if (!campaign) return NotFoundError();
+    if (!elements) return NotFoundError();
 
     return {
       statusCode: getStatusCode(StatusMessageEnum.OK),
       statusMessage: StatusMessageEnum.OK,
-      data: await prisma.campaign.update({
+      data: await prisma.elements.update({
         where: { id: String(query.id) },
         data: { ...body, updatedAt: new Date() }
       })
