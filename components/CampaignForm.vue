@@ -6,11 +6,11 @@ import BaseForm from '~/components/base/form/BaseForm.vue';
 import { useCampaign } from '~/stores/campaign.store';
 import { FormDataInterface } from '~/interfaces/form-data.interface';
 
-defineProps({
+const props = defineProps({
   campaign: { type: Object as PropType<Campaign>, default: null }
 });
 
-const emit = defineEmits<{ (e: 'on:cancel'): void }>();
+const emit = defineEmits<{ (e: 'on:cancel'): void; (e: 'on:success'): void }>();
 
 const createInputDefinitions: InputDefinitionInterface[] = [
   { name: 'title', label: 'Title', required: true },
@@ -25,8 +25,11 @@ const updateInputDefinitions: InputDefinitionInterface[] = [
 ];
 
 const $campaign = useCampaign();
-const create = async (create: FormDataInterface) => {
-  return await $campaign.create(create);
+const create = async (body: FormDataInterface) => {
+  props.campaign
+    ? await $campaign.update(props.campaign.id, body)
+    : await $campaign.create(body);
+  emit('on:success');
 };
 </script>
 

@@ -51,6 +51,7 @@ watch(
       v-if="editing"
       :campaign="selectedCampaign"
       @on:cancel="editing = false"
+      @on:success="editing = false"
     />
   </div>
 </template>

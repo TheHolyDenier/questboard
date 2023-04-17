@@ -32,6 +32,25 @@ export class BaseService<T, C = null, U = null> {
     return plainToInstance(this.Dto, (result as ApiResponse<T>).data);
   }
 
+  async update(id: string, body: FormDataInterface): Promise<T> {
+    const user = useUser();
+
+    const result = await $fetch(`${this.baseUrl}?id=${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: user.token()
+      },
+      body: JSON.stringify(
+        plainToInstance(this.UpdateDto, body, {
+          excludeExtraneousValues: true
+        })
+      )
+    });
+
+    return plainToInstance(this.Dto, (result as ApiResponse<T>).data);
+  }
+
   async get(): Promise<T[]> {
     const user = useUser();
 

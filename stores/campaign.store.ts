@@ -26,10 +26,17 @@ export const useCampaign = defineStore('campaign', () => {
     await api.campaign.delete(id);
   };
 
+  const update = async (id: string, body: FormDataInterface) => {
+    const campaign = await api.campaign.update(id, body);
+    refresh();
+    return campaign;
+  };
+
   return {
     campaigns,
     selectedCampaign,
     create,
+    update,
     get,
     getOne,
     remove,
