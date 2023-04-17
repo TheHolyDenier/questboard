@@ -1,4 +1,5 @@
 import { H3Event } from 'h3';
+import { Campaign } from '@prisma/client';
 import { ApiResponse } from '~/interfaces/api-response';
 import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 import { prisma } from '~/server/api';
@@ -6,22 +7,23 @@ import { CampaignsManager } from '~/manager/campaigns.manager';
 import { NotFoundError } from '~/errors/not-found.error';
 
 export default defineEventHandler(
-  async (event: H3Event): Promise<ApiResponse<null>> => {
+  async (event: H3Event): Promise<ApiResponse<Campaign | null>> => {
     const user = event.context.user;
     const query = getQuery(event);
 
-    if (query && query.id) {
-      const campaign = await CampaignsManager.findOne(user, String(query.id));
+    const body = await readBody(event);
 
-      if (!campaign) return NotFoundError();
+    const campaign = await CampaignsManager.findOne(user, String(query.id));
 
-      await prisma.campaign.delete({ where: { id: String(query.id) } });
-    }
+    if (!campaign) return NotFoundError();
 
     return {
       statusCode: getStatusCode(StatusMessageEnum.OK),
       statusMessage: StatusMessageEnum.OK,
-      data: null
+      data: await prisma.campaign.update({
+        where: { id: String(query.id) },
+        data: { ...body, updatedAt: new Date() }
+      })
     };
   }
 );
