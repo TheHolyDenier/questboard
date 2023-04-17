@@ -13,6 +13,19 @@ const props = defineProps({
   contrastColor: { type: Boolean }
 });
 
+const backgroundColor = computed(() => {
+  if (['transparent', 'white', 'black'].includes(props.color)) {
+    return 'var(--maz-color-text)';
+  }
+
+  let color = `var(--maz-color-${props.color}`;
+  if (props.contrastColor) {
+    color += '-contrast';
+  }
+  color += ')';
+  return color;
+});
+
 const src = `/icons/${props.icon}.svg`;
 </script>
 
@@ -20,9 +33,7 @@ const src = `/icons/${props.icon}.svg`;
   <span
     class="icon"
     :style="{
-      backgroundColor: `var(--maz-color-${props.color}${
-        contrastColor ? '-contrast' : ''
-      })`,
+      backgroundColor: backgroundColor,
       '-webkit-mask': `url(${src}) no-repeat center / contain`,
       mask: `url(${src}) no-repeat center / contain`,
       width: props.size,

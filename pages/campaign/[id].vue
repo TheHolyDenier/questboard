@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useCampaign } from '~/stores/campaign.store';
+import EditButton from '~/components/EditButton.vue';
 
 definePageMeta({
   middleware: 'auth'
@@ -35,14 +36,27 @@ watch(
 </script>
 
 <template>
-  <div v-if="selectedCampaign">
-    <h1>
-      {{ selectedCampaign.title }}
+  <div v-if="selectedCampaign" class="campaign">
+    <div class="campaign__header">
+      <h1>
+        {{ selectedCampaign.title }}
+      </h1>
       <DeleteButton @on:delete="remove" />
-    </h1>
-
-    <QuestBoard />
+      <EditButton />
+    </div>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.campaign {
+  &__header {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+
+    h1 {
+      flex: 1;
+    }
+  }
+}
+</style>

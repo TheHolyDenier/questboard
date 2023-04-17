@@ -18,7 +18,8 @@ const askConfirm = async () => {
 </script>
 
 <template>
-  <BaseButton leading-icon="reaper-scythe" label="Delete" @click="askConfirm" />
+  <BaseButton leading-icon="card-discard" label="Delete" @click="askConfirm" />
+
   <MazDialogPromise identifier="dialog">
     <template #title> Are you sure you want to delete? </template>
     <template #default> This action cannot be undone.</template>

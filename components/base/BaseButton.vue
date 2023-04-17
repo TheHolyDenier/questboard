@@ -41,7 +41,12 @@ defineProps({
       no-padding
     >
       <div class="button__container">
-        <BaseIcon v-if="leadingIcon" :icon="leadingIcon" contrast-color />
+        <BaseIcon
+          v-if="leadingIcon"
+          :icon="leadingIcon"
+          :color="color"
+          contrast-color
+        />
 
         <span>{{ label }}</span>
 
