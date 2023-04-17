@@ -20,7 +20,7 @@ onMounted(() => {
 
 const remove = async () => {
   await $campaign.remove(id.value);
-  await router.replace({ name: 'campaign-list' });
+  await router.replace({ name: 'campaign' });
 };
 
 watch(
