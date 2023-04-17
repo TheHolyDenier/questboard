@@ -1,5 +1,5 @@
 import { H3Event } from 'h3';
-import { Element, Element } from '@prisma/client';
+import { Element } from '@prisma/client';
 import { ApiResponse } from '~/interfaces/api-response';
 import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 import { prisma } from '~/server/api';
