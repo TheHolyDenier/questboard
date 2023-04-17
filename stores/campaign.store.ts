@@ -1,11 +1,11 @@
-import { Campaign } from '@prisma/client';
 import { api } from '~/plugins/di';
 import { FormDataInterface } from '~/interfaces/form-data.interface';
+import { CampaignDto } from '~/domain/campaigns/campaign.dto';
 
 export const useCampaign = defineStore('campaign', () => {
   const needsRefresh = ref<number>(Date.now());
-  const campaigns = ref<Campaign[]>([]);
-  const selectedCampaign = ref<Campaign>();
+  const campaigns = ref<CampaignDto[]>([]);
+  const selectedCampaign = ref<CampaignDto>();
 
   const refresh = () => (needsRefresh.value = Date.now());
   const create = async (body: FormDataInterface) => {

@@ -1,6 +1,6 @@
 import { Expose } from 'class-transformer';
 
-export class CreateCampaignDto {
+export class CampaignDto {
   @Expose()
   title: string;
 

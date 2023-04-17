@@ -1,15 +1,15 @@
 import { H3Event } from 'h3';
-import { Campaign } from '@prisma/client';
+import { Element } from '@prisma/client';
 import { ApiResponse } from '~/interfaces/api-response';
 import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 import { prisma } from '~/server/api';
 
 export default defineEventHandler(
-  async (event: H3Event): Promise<ApiResponse<Campaign>> => {
+  async (event: H3Event): Promise<ApiResponse<Element>> => {
     const user = event.context.user;
     const body = await readBody(event);
 
-    const campaign = await prisma.campaign.create({
+    const element = await prisma.element.create({
       data: {
         ...body,
         createdById: user.id,
@@ -21,7 +21,7 @@ export default defineEventHandler(
     return {
       statusCode: getStatusCode(StatusMessageEnum.OK),
       statusMessage: StatusMessageEnum.OK,
-      data: campaign
+      data: element
     };
   }
 );

@@ -1,15 +1,21 @@
 import { Expose } from 'class-transformer';
 
-export class CreateCampaignDto {
+export class CreateElementDto {
   @Expose()
-  title: string;
+  name: string;
 
   @Expose()
-  summary?: string;
+  type: string;
+
+  @Expose()
+  description?: string;
 
   @Expose()
   cover?: string;
 
   @Expose()
   isFavorite?: boolean;
+
+  @Expose()
+  exists?: boolean;
 }

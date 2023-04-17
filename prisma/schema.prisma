@@ -68,6 +68,7 @@ model Element {
 
   isFavorite Boolean?
   exists     Boolean?
+  type       String
 
   createdById String
   createdAt   DateTime @default(now()) @map(name: "created_at")
