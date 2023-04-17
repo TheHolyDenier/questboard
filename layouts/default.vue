@@ -1,8 +1,5 @@
 <template>
   <div class="layout">
-    <div class="layout__breadcrumbs">
-      <RouterLink :to="{ name: 'campaign-list' }">Campaigns</RouterLink>
-    </div>
     <div class="layout__profile">
       <MiniProfile></MiniProfile>
     </div>
@@ -22,10 +19,6 @@ defineProps({
 .layout {
   position: relative;
 
-  &__breadcrumbs {
-    padding: 1em;
-  }
-
   &__profile {
     position: absolute;
     top: 0;
@@ -34,7 +27,8 @@ defineProps({
   }
 
   &__container {
-    padding: 1em;
+    padding-inline: 1em;
+    padding-block: 3em;
   }
 }
 </style>
