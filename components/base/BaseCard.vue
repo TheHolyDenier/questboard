@@ -2,6 +2,7 @@
 import MazCard from 'maz-ui/components/MazCard';
 import { PropType } from 'vue';
 defineProps({
+  images: { type: [Array, null] as PropType<string[] | null>, default: null },
   title: { type: String, default: null },
   subtitle: { type: String, default: null },
   orientation: {
@@ -10,28 +11,36 @@ defineProps({
     >,
     default: 'column'
   },
-  zoom: { type: Boolean }
+  zoom: { type: Boolean },
+  bordered: { type: Boolean, default: true },
+  collapsable: { type: Boolean }
 });
 </script>
 
 <template>
   <MazCard
-    class="card"
+    :bordered="bordered || false"
+    :collapsable="collapsable || false"
     :elevation="false"
+    :images="images"
     :orientation="orientation || ''"
     :zoom="zoom || false"
-    bordered
+    class="card"
     no-padding
   >
-    <template v-if="title" #title>
-      <div class="card__title">
-        <h2 style="margin: 0">{{ title }}</h2>
-      </div>
+    <template v-if="title || $slots.title()" #title>
+      <slot name="title">
+        <div class="card__title">
+          <h2 style="margin: 0">{{ title }}</h2>
+        </div>
+      </slot>
     </template>
-    <template v-if="subtitle" #subtitle>
-      <span> {{ subtitle }}} </span>
+    <template v-if="subtitle || $slots.subtitle" #subtitle>
+      <slot name="subtitle">
+        <p>{{ subtitle }}</p>
+      </slot>
     </template>
-    <template #content>
+    <template v-if="$slots.default" #content>
       <slot></slot>
     </template>
   </MazCard>

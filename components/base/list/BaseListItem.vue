@@ -11,7 +11,10 @@ defineEmits<{ (e: 'on:click', value: string): void }>();
 </script>
 
 <template>
-  <div :class="[item.nameClass]" @click="$emit('on:click', item.name)">
+  <div
+    :class="{ active: item.to, [item.nameClass]: true }"
+    @click="$emit('on:click', item.name)"
+  >
     <RouterLink v-if="item.to" :to="item.to">
       <BaseListItemValue :item="item" />
     </RouterLink>

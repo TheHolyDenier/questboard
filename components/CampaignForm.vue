@@ -34,17 +34,15 @@ const create = async (body: FormDataInterface) => {
 </script>
 
 <template>
-  <BaseCard title="Create campaign">
-    <BaseForm
-      :model="campaign"
-      :input-definitions="
-        campaign ? updateInputDefinitions : createInputDefinitions
-      "
-      :cancel-action="!!campaign"
-      @on:submit="create"
-      @on:cancel="emit('on:cancel')"
-    />
-  </BaseCard>
+  <BaseForm
+    :model="campaign"
+    :input-definitions="
+      campaign ? updateInputDefinitions : createInputDefinitions
+    "
+    :cancel-action="!!campaign"
+    @on:submit="create"
+    @on:cancel="emit('on:cancel')"
+  />
 </template>
 
 <style scoped lang="scss"></style>

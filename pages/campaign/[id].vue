@@ -2,7 +2,6 @@
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useCampaign } from '~/stores/campaign.store';
-import EditButton from '~/components/EditButton.vue';
 
 definePageMeta({
   middleware: 'auth'
@@ -14,8 +13,6 @@ const $campaign = useCampaign();
 
 const id = computed(() => String(route.params.id));
 const { selectedCampaign } = storeToRefs($campaign);
-
-const editing = ref(true);
 
 onMounted(() => {
   $campaign.getOne(id.value);
@@ -39,26 +36,31 @@ watch(
 
 <template>
   <div v-if="selectedCampaign" class="campaign">
-    <div class="campaign__header">
-      <h1>
-        {{ selectedCampaign.title }}
-      </h1>
-      <DeleteButton @on:delete="remove" />
-      <EditButton @click="editing = true" />
-    </div>
-
-    <CampaignForm
-      v-if="editing"
-      :campaign="selectedCampaign"
-      @on:cancel="editing = false"
-      @on:success="editing = false"
-    />
+    <BaseCard
+      :bordered="false"
+      :images="selectedCampaign.cover ? [String(selectedCampaign.cover)] : null"
+      orientation="row"
+      style="width: 100%"
+    >
+      <template #title>
+        <div class="campaign__title">
+          <h1>
+            {{ selectedCampaign.title }}
+          </h1>
+          <DeleteButton @on:delete="remove" />
+          <CampaignFormSidebar :campaign="selectedCampaign" />
+        </div>
+      </template>
+      <template #subtitle>
+        <p class="campaign__subtitle">{{ selectedCampaign.summary }}</p>
+      </template>
+    </BaseCard>
   </div>
 </template>
 
 <style scoped lang="scss">
 .campaign {
-  &__header {
+  &__title {
     display: flex;
     gap: 1em;
     align-items: center;
@@ -66,6 +68,10 @@ watch(
     h1 {
       flex: 1;
     }
+  }
+
+  &__subtitle {
+    margin-inline-start: 1em;
   }
 }
 </style>

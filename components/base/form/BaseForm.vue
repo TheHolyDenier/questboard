@@ -5,7 +5,7 @@ import BaseFormInput from '~/components/base/form/BaseFormInput.vue';
 import { InputEventInterface } from '~/interfaces/input-event.interface';
 import { FormDataInterface } from '~/interfaces/form-data.interface';
 
-defineProps({
+const props = defineProps({
   inputDefinitions: {
     type: Array as PropType<InputDefinitionInterface[]>,
     default: () => []
@@ -23,6 +23,18 @@ const emit = defineEmits<{
 }>();
 
 const inputValues = reactive<InputEventInterface[]>([]);
+const loaded = ref(false);
+
+onMounted(() => {
+  for (const inputDefinition of props.inputDefinitions) {
+    inputValues.push({
+      name: inputDefinition.name,
+      value: props.model ? props.model[inputDefinition.name] : null
+    });
+  }
+  loaded.value = true;
+});
+
 const formData = computed<FormDataInterface>(() =>
   inputValues.reduce(
     (acc: FormDataInterface, value: InputEventInterface) =>
@@ -46,12 +58,12 @@ const submit = () => emit('on:submit', formData.value);
 </script>
 
 <template>
-  <div class="form">
+  <div v-if="loaded" class="form">
     <BaseFormInput
       v-for="inputDefinition of inputDefinitions"
       :key="inputDefinition.name"
       :input-definition="inputDefinition"
-      :model="model?.[inputDefinition.name]"
+      :model="formData[inputDefinition.name]"
       @on:change="updateDataForm"
     />
     <div class="form__actions">
