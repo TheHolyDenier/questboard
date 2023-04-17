@@ -1,1 +1,1 @@
-export type IconType = 'pawn' | 'bone-bite';
+export type IconType = 'scroll-quill' | 'reaper-scythe';

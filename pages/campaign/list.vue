@@ -14,7 +14,7 @@ const campaigns = computed(() =>
     title: campaign.title,
     subtitle: campaign.summary || undefined,
     to: { name: 'campaign-id', params: { id: campaign.id } },
-    leadingIcon: 'pawn'
+    leadingIcon: 'scroll-quill'
   }))
 );
 
