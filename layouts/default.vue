@@ -1,6 +1,9 @@
 <template>
   <div class="layout">
-    <div class="layout__profile">
+    <div class="layout__navigation">
+      <RouterLink :to="{ name: 'index' }">
+        <BaseButton leading-icon="wood-cabin" color="transparent" />
+      </RouterLink>
       <MiniProfile></MiniProfile>
     </div>
     <div class="layout__container">
@@ -18,17 +21,15 @@ defineProps({
 <style lang="scss" scoped>
 .layout {
   position: relative;
+  padding-inline: 1em;
 
-  &__profile {
-    position: absolute;
+  &__navigation {
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
     top: 0;
-    right: 5px;
-    z-index: 99;
-  }
-
-  &__container {
-    padding-inline: 1em;
-    padding-block: 3em;
+    width: calc(100vw - 2em);
+    padding-block: 0.5em;
   }
 }
 </style>

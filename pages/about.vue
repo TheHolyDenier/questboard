@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const credits = [
   { author: 'Faithtoken', icons: ['card-discard'] },
-  { author: 'Delapouite', icons: ['card-joker'] }
+  { author: 'Delapouite', icons: ['card-joker', 'wood-cabin'] }
 ];
 </script>
 

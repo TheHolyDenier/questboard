@@ -64,6 +64,8 @@ watch(
     display: flex;
     gap: 1em;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 
     h1 {
       flex: 1;
