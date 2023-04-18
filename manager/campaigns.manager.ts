@@ -1,10 +1,9 @@
 import { User } from '@prisma/client';
 import { prisma } from '~/server/api';
-import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 
 export class CampaignsManager {
   static findOne = async (user: User, id: string) => {
-    const data = await prisma.campaign.findFirstOrThrow({
+    return prisma.campaign.findFirstOrThrow({
       where: {
         id,
         OR: [
@@ -13,16 +12,10 @@ export class CampaignsManager {
         ]
       }
     });
-
-    return {
-      statusCode: getStatusCode(StatusMessageEnum.OK),
-      statusMessage: StatusMessageEnum.OK,
-      data
-    };
   };
 
   static findMany = async (user: User) => {
-    const data = await prisma.campaign.findMany({
+    return prisma.campaign.findMany({
       where: {
         OR: [
           { createdById: { equals: user.id } },
@@ -31,11 +24,5 @@ export class CampaignsManager {
       },
       orderBy: [{ isFavorite: 'asc' }, { title: 'asc' }]
     });
-
-    return {
-      statusCode: getStatusCode(StatusMessageEnum.OK),
-      statusMessage: StatusMessageEnum.OK,
-      data
-    };
   };
 }

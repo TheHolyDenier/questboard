@@ -1,26 +1,26 @@
 import { H3Event } from 'h3';
-import { Campaign } from '@prisma/client';
+import { Element } from '@prisma/client';
 import { ApiResponse } from '~/interfaces/api-response';
 import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 import { prisma } from '~/server/api';
-import { CampaignsManager } from '~/manager/campaigns.manager';
-import { NotFoundError } from '~/errors/not-found.error';
+import { notFoundError } from '~/errors/not-found.error';
+import { ElementsManager } from '~/manager/elements.manager';
 
 export default defineEventHandler(
-  async (event: H3Event): Promise<ApiResponse<Campaign | null>> => {
+  async (event: H3Event): Promise<ApiResponse<Element | null>> => {
     const user = event.context.user;
     const query = getQuery(event);
 
     const body = await readBody(event);
 
-    const campaign = await CampaignsManager.findOne(user, String(query.id));
+    const element = await ElementsManager.findOne(user, String(query.id));
 
-    if (!campaign) return NotFoundError();
+    if (!element) throw notFoundError();
 
     return {
       statusCode: getStatusCode(StatusMessageEnum.OK),
       statusMessage: StatusMessageEnum.OK,
-      data: await prisma.campaign.update({
+      data: await prisma.element.update({
         where: { id: String(query.id) },
         data: { ...body, updatedAt: new Date() }
       })

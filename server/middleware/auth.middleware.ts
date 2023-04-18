@@ -3,8 +3,6 @@ import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 import { prisma } from '~/server/api';
 
 export default defineEventHandler(async (event: H3Event) => {
-  console.info('New request: ' + event.node.req.url);
-
   if (event.node.req.url?.includes('secure')) {
     const authorization = getHeader(event, 'Authorization');
 

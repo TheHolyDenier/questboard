@@ -10,5 +10,8 @@ module.exports = {
   },
   extends: ['@nuxtjs/eslint-config-typescript', 'plugin:prettier/recommended'],
   plugins: [],
-  rules: {},
+  rules: {
+    "require-await": "off",
+    "no-console": ["error", { allow: ["info", "error"] }]
+  },
 }

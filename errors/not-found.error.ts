@@ -1,10 +1,8 @@
-import { ApiResponse } from '~/interfaces/api-response';
 import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 
-export const NotFoundError = (): ApiResponse<null> => {
-  return {
+export const notFoundError = () =>
+  createError({
     statusCode: getStatusCode(StatusMessageEnum.NOT_FOUND),
     statusMessage: StatusMessageEnum.NOT_FOUND,
-    data: null
-  };
-};
+    message: StatusMessageEnum.NOT_FOUND
+  });
