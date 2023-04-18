@@ -30,9 +30,22 @@ watch(
 </script>
 
 <template>
-  <MazCheckbox v-model="inputValue" :name="inputDefinition.name">
-    {{ inputDefinition.label }}
-  </MazCheckbox>
+  <div class="checkbox">
+    <MazCheckbox
+      :id="inputDefinition.name"
+      v-model="inputValue"
+      :name="inputDefinition.name"
+    >
+      <h4>
+        {{ inputDefinition.label }}
+      </h4>
+    </MazCheckbox>
+  </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+</style>

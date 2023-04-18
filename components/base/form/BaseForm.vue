@@ -8,7 +8,7 @@ import { FormDataInterface } from '~/interfaces/form-data.interface';
 const props = defineProps({
   inputDefinitions: {
     type: Array as PropType<InputDefinitionInterface[]>,
-    default: () => []
+    required: true
   },
   model: { type: Object, default: null },
   okButtonLabel: { type: String, default: 'Save' },
@@ -25,15 +25,21 @@ const emit = defineEmits<{
 const inputValues = reactive<InputEventInterface[]>([]);
 const loaded = ref(false);
 
-onMounted(() => {
+const generateInputValues = () => {
+  loaded.value = false;
+  inputValues.length = 0;
+
   for (const inputDefinition of props.inputDefinitions) {
     inputValues.push({
       name: inputDefinition.name,
-      value: props.model ? props.model[inputDefinition.name] : null
+      value: props.model ? props.model[inputDefinition.name] : ''
     });
   }
+
   loaded.value = true;
-});
+};
+
+onMounted(() => generateInputValues());
 
 const formData = computed<FormDataInterface>(() =>
   inputValues.reduce(
@@ -54,7 +60,10 @@ const updateDataForm = (inputEvent: InputEventInterface) => {
   emit('on:change', formData.value);
 };
 
-const submit = () => emit('on:submit', formData.value);
+const submit = () => {
+  emit('on:submit', formData.value);
+  generateInputValues();
+};
 </script>
 
 <template>

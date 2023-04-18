@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { PropType, ref } from 'vue';
-import MazInput from 'maz-ui/components/MazInput';
+import MazTextarea from 'maz-ui/components/MazTextarea';
 import { InputDefinitionInterface } from '~/interfaces/input-definition.interface';
 import { InputEventInterface } from '~/interfaces/input-event.interface';
+import { useForm } from '~/composables/form.composable';
 
 const props = defineProps({
   inputDefinition: {
@@ -30,6 +31,7 @@ watch(
     });
   }
 );
+const form = useForm();
 
 const isValid = async () => {
   error.value = false;
@@ -47,9 +49,10 @@ const isValid = async () => {
 </script>
 
 <template>
-  <MazInput
+  <MazTextarea
     :id="inputDefinition.name"
     v-model="inputValue"
+    class="--has-state"
     :error="error"
     :hint="(error ? errorMessage : inputDefinition.hint) || ''"
     :name="inputDefinition.name"

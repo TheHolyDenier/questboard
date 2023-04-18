@@ -12,14 +12,9 @@ const props = defineProps({
 
 const emit = defineEmits<{ (e: 'on:cancel'): void; (e: 'on:success'): void }>();
 
-const createInputDefinitions: InputDefinitionInterface[] = [
+const inputDefinitions: InputDefinitionInterface[] = [
   { name: 'title', label: 'Title', required: true },
-  { name: 'summary', label: 'Summary' }
-];
-
-const updateInputDefinitions: InputDefinitionInterface[] = [
-  { name: 'title', label: 'Title', required: true },
-  { name: 'summary', label: 'Summary' },
+  { name: 'summary', label: 'Summary', type: 'textarea' },
   { name: 'cover', label: 'Cover' },
   { name: 'isFavorite', label: 'Is favorite?', type: 'checkbox' }
 ];
@@ -36,9 +31,7 @@ const create = async (body: FormDataInterface) => {
 <template>
   <BaseForm
     :model="campaign"
-    :input-definitions="
-      campaign ? updateInputDefinitions : createInputDefinitions
-    "
+    :input-definitions="inputDefinitions"
     :cancel-action="!!campaign"
     @on:submit="create"
     @on:cancel="emit('on:cancel')"
