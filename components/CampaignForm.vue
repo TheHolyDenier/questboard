@@ -20,7 +20,7 @@ const inputDefinitions: InputDefinitionInterface[] = [
 ];
 
 const $campaign = useCampaign();
-const create = async (body: FormDataInterface) => {
+const submit = async (body: FormDataInterface) => {
   props.campaign
     ? await $campaign.update(props.campaign.id, body)
     : await $campaign.create(body);
@@ -33,7 +33,7 @@ const create = async (body: FormDataInterface) => {
     :model="campaign"
     :input-definitions="inputDefinitions"
     :cancel-action="!!campaign"
-    @on:submit="create"
+    @on:submit="submit"
     @on:cancel="emit('on:cancel')"
   />
 </template>
