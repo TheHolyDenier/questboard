@@ -1,6 +1,23 @@
 export type IconType =
-  // Delapouite
   | 'scroll-quill'
   | 'card-joker'
-  // Faithtoken
-  | 'card-discard';
+  | 'card-discard'
+  | 'wood-cabin'
+  | 'barbarian'
+  | 'dwarf-face'
+  | 'female-vampire'
+  | 'vampire-dracula'
+  | 'fish-monster'
+  | 'goblin-head'
+  | 'goblin-camp'
+  | 'golem-head'
+  | 'ogre'
+  | 'orc-head'
+  | 'wizard-face'
+  | 'woman-elf-face'
+  | 'dwarf-helmet'
+  | 'elf-helmet'
+  | 'troll'
+  | 'diablo-skull'
+  | 'dragon-head'
+  | 'visored-helm';
