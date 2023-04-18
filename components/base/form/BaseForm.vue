@@ -94,6 +94,9 @@ const submit = () => {
   margin: 1em;
   flex-wrap: wrap;
   flex-direction: column;
+  background-color: white;
+  padding: 1em;
+  border-radius: 15px 0;
 
   > * {
     min-width: 300px;

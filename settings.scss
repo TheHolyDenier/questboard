@@ -58,3 +58,11 @@ h1 {
 }
 
 
+.card.active {
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+}

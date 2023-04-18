@@ -13,19 +13,21 @@ defineProps({
   },
   zoom: { type: Boolean },
   bordered: { type: Boolean, default: true },
-  collapsable: { type: Boolean }
+  collapsable: { type: Boolean },
+  hasAction: { type: Boolean }
 });
 </script>
 
 <template>
   <MazCard
+    class="card"
+    :class="{ active: hasAction }"
     :bordered="bordered || false"
     :collapsable="collapsable || false"
     :elevation="false"
     :images="images"
     :orientation="orientation || ''"
     :zoom="zoom || false"
-    class="card"
     no-padding
   >
     <template v-if="title || $slots.title" #title>

@@ -52,7 +52,6 @@ const isValid = async () => {
   <MazTextarea
     :id="inputDefinition.name"
     v-model="inputValue"
-    class="--has-state"
     :error="error"
     :hint="(error ? errorMessage : inputDefinition.hint) || ''"
     :name="inputDefinition.name"

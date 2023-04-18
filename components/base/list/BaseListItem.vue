@@ -12,6 +12,7 @@ defineEmits<{ (e: 'on:click', value: string): void }>();
 
 <template>
   <div
+    class="card"
     :class="{ active: item.to, [item.nameClass]: true }"
     @click="$emit('on:click', item.name)"
   >
@@ -31,15 +32,5 @@ defineEmits<{ (e: 'on:click', value: string): void }>();
   color: $blue;
   position: relative;
   background-color: $green-light;
-}
-
-a,
-.active {
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-  }
 }
 </style>

@@ -12,7 +12,7 @@ const open = async () => {
 
 <template>
   <div class="elements">
-    <BaseCard @click="open"> + </BaseCard>
+    <BaseCard has-action @click="open"> + </BaseCard>
     <BaseCard @click="open"> + </BaseCard>
     <BaseCard @click="open"> + </BaseCard>
     <BaseCard @click="open"> + </BaseCard>

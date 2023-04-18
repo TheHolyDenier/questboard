@@ -14,8 +14,12 @@ const props = defineProps({
 });
 
 const backgroundColor = computed(() => {
-  if (['transparent', 'white', 'black'].includes(props.color)) {
+  if (['transparent', 'black'].includes(props.color)) {
     return 'var(--maz-color-text)';
+  }
+
+  if (['white'].includes(props.color)) {
+    return 'var(--maz-bg-color-light)';
   }
 
   let color = `var(--maz-color-${props.color}`;

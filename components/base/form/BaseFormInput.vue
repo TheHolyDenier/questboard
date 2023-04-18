@@ -29,8 +29,14 @@ const emit = defineEmits<{
         {{ inputDefinition.label }}{{ inputDefinition.required ? '*' : '' }}:
       </h4>
     </label>
+    <BaseFormInputSelect
+      v-if="inputDefinition.type === 'select'"
+      :input-definition="inputDefinition"
+      :model="String(model)"
+      @on:change="emit('on:change', $event)"
+    />
     <BaseFormInputTextarea
-      v-if="inputDefinition.type === 'textarea'"
+      v-else-if="inputDefinition.type === 'textarea'"
       :input-definition="inputDefinition"
       :model="String(model)"
       @on:change="emit('on:change', $event)"
