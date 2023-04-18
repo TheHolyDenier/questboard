@@ -28,7 +28,7 @@ defineProps({
     class="card"
     no-padding
   >
-    <template v-if="title || $slots.title()" #title>
+    <template v-if="title || $slots.title" #title>
       <slot name="title">
         <div class="card__title">
           <h2 style="margin: 0">{{ title }}</h2>

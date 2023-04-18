@@ -2,25 +2,31 @@
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useCampaign } from '~/stores/campaign.store';
+import { useSidebar } from '~/composables/sidebar.composable';
+import CampaignSidebar from '~/components/CampaignSidebar.vue';
+import ElementCards from '~/components/ElementCards.vue';
 
 definePageMeta({
   middleware: 'auth'
 });
 
-const route = useRoute();
-const router = useRouter();
+const $sidebar = useSidebar();
+const $route = useRoute();
+const $router = useRouter();
 const $campaign = useCampaign();
 
-const id = computed(() => String(route.params.id));
+const id = computed(() => String($route.params.id));
 const { selectedCampaign } = storeToRefs($campaign);
 
 onMounted(() => {
   $campaign.getOne(id.value);
 });
 
+const open = () => $sidebar.open();
+
 const remove = async () => {
   await $campaign.remove(id.value);
-  await router.replace({ name: 'campaign' });
+  await $router.replace({ name: 'campaign' });
 };
 
 watch(
@@ -48,13 +54,17 @@ watch(
             {{ selectedCampaign.title }}
           </h1>
           <DeleteButton @on:delete="remove" />
-          <CampaignFormSidebar :campaign="selectedCampaign" />
+          <EditButton @click="open" />
         </div>
       </template>
       <template #subtitle>
         <p class="campaign__subtitle">{{ selectedCampaign.summary }}</p>
       </template>
     </BaseCard>
+
+    <ElementCards />
+
+    <CampaignSidebar :campaign="selectedCampaign" />
   </div>
 </template>
 

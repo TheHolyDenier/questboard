@@ -1,18 +1,12 @@
 import { H3Event } from 'h3';
 import { Campaign } from '@prisma/client';
 import { CampaignsManager } from '~/manager/campaigns.manager';
-import { notFoundError } from '~/errors/not-found.error';
 import { ApiMethodsEnum } from '~/enums/api-methods.enum';
 import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 import { prisma } from '~/server/api';
 
 export default defineEventHandler(async (event: H3Event) => {
-  const id = getRouterParam(event, 'campaignId');
-  if (!id) throw notFoundError();
-
-  const campaign = await CampaignsManager.findOne(event.context.user, id);
-
-  if (!campaign) throw notFoundError();
+  const campaign = await CampaignsManager.getParamAndFind(event);
 
   switch (event.context.method) {
     case ApiMethodsEnum.DELETE:

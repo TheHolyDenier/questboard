@@ -9,12 +9,10 @@ defineProps({
 
 const sidebar = useSidebar();
 
-const open = () => sidebar.open();
 const close = () => sidebar.close();
 </script>
 
 <template>
-  <EditButton @click="open" />
   <BaseSidebar title="Edit campaign">
     <CampaignForm :campaign="campaign" @on:cancel="close" @on:success="close" />
   </BaseSidebar>
