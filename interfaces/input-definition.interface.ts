@@ -5,6 +5,7 @@ export interface InputDefinitionInterface {
   label: string;
   type?: 'text' | 'password' | 'checkbox' | 'textarea' | 'select';
   required?: boolean;
+  multiple?: boolean;
   disabled?: boolean;
   readonly?: boolean;
   hint?: string;

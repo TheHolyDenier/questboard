@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { PropType, ref } from 'vue';
-import MazInput from 'maz-ui/components/MazInput';
 import { InputDefinitionInterface } from '~/interfaces/input-definition.interface';
 import { InputEventInterface } from '~/interfaces/input-event.interface';
 
@@ -47,16 +46,22 @@ const isValid = async () => {
 </script>
 
 <template>
-  <MazInput
+  <BaseFormInputLayout
     :id="inputDefinition.name"
-    v-model="inputValue"
-    :error="error"
-    :hint="(error ? errorMessage : inputDefinition.hint) || ''"
-    :name="inputDefinition.name"
-    :required="inputDefinition.required || false"
-    :type="inputDefinition.type || 'text'"
-    @blur="isValid"
-  />
+    :label="inputDefinition.label"
+    :required="inputDefinition.required"
+  >
+    <input
+      :id="inputDefinition.name"
+      v-model="inputValue"
+      :aria-invalid="error || null"
+      :name="inputDefinition.name"
+      :placeholder="errorMessage"
+      :required="inputDefinition.required"
+      :type="inputDefinition.type"
+      @blur="isValid"
+    />
+  </BaseFormInputLayout>
 </template>
 
 <style scoped lang="scss"></style>

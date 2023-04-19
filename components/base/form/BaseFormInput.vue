@@ -24,11 +24,6 @@ const emit = defineEmits<{
     @on:change="emit('on:change', $event)"
   />
   <div v-else>
-    <label :for="inputDefinition.name">
-      <h4>
-        {{ inputDefinition.label }}{{ inputDefinition.required ? '*' : '' }}:
-      </h4>
-    </label>
     <BaseFormInputSelect
       v-if="inputDefinition.type === 'select'"
       :input-definition="inputDefinition"

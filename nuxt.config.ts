@@ -4,7 +4,11 @@ dotenv.config();
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  css: ['maz-ui/css/main.css', '~/settings.scss'],
+  css: [
+    '@picocss/pico/scss/pico.scss',
+    'maz-ui/css/main.css',
+    '~/settings.scss'
+  ],
   vite: {
     ssr: {
       noExternal: []

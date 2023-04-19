@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { PropType, ref } from 'vue';
-import MazCheckbox from 'maz-ui/components/MazCheckbox';
 import { InputDefinitionInterface } from '~/interfaces/input-definition.interface';
 import { InputEventInterface } from '~/interfaces/input-event.interface';
 
@@ -30,17 +29,21 @@ watch(
 </script>
 
 <template>
-  <div class="checkbox">
-    <MazCheckbox
+  <fieldset>
+    <input
       :id="inputDefinition.name"
       v-model="inputValue"
       :name="inputDefinition.name"
+      type="checkbox"
+    />
+
+    <BaseFormInputLayout
+      :id="inputDefinition.name"
+      :label="inputDefinition.label"
+      :required="inputDefinition.required"
     >
-      <h4>
-        {{ inputDefinition.label }}
-      </h4>
-    </MazCheckbox>
-  </div>
+    </BaseFormInputLayout>
+  </fieldset>
 </template>
 
 <style scoped lang="scss">
