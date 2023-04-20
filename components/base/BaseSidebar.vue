@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import MazDrawer from 'maz-ui/components/MazDrawer';
 import { useSidebar } from '~/composables/sidebar.composable';
 
 defineProps({ title: { type: String, required: true } });
@@ -11,19 +10,16 @@ const close = () => sidebar.close();
 </script>
 
 <template>
-  <MazDrawer
-    :model-value="isSidebarOpen"
-    variant="right"
-    backdrop-class="sidebar"
-    @close="close"
-  >
-    <template #title>
-      {{ title }}
-    </template>
-    <template #default>
-      <slot></slot>
-    </template>
-  </MazDrawer>
+  <div>
+    <div v-if="isSidebarOpen" @close="close">
+      <div>
+        {{ title }}
+      </div>
+      <div>
+        <slot></slot>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss"></style>

@@ -46,19 +46,31 @@ const isValid = async () => {
 
   return true;
 };
+
+// const editor = new Editor({
+//   usageStatistics: false
+// });
+
+// const editor = new toastui.Editor({
+//   el: document.querySelector('#editor'),
+//   previewStyle: 'vertical',
+//   height: '500px',
+//   initialValue: content
+// });
 </script>
 
 <template>
-  <MazTextarea
-    :id="inputDefinition.name"
-    v-model="inputValue"
-    :error="error"
-    :hint="(error ? errorMessage : inputDefinition.hint) || ''"
-    :name="inputDefinition.name"
-    :required="inputDefinition.required || false"
-    :type="inputDefinition.type || 'text'"
-    @blur="isValid"
-  />
+  <BaseMarkdown :id="inputDefinition.name" />
+  <!--  <MazTextarea-->
+  <!--    :id="inputDefinition.name"-->
+  <!--    v-model="inputValue"-->
+  <!--    :error="error"-->
+  <!--    :hint="(error ? errorMessage : inputDefinition.hint) || ''"-->
+  <!--    :name="inputDefinition.name"-->
+  <!--    :required="inputDefinition.required || false"-->
+  <!--    :type="inputDefinition.type || 'text'"-->
+  <!--    @blur="isValid"-->
+  <!--  />-->
 </template>
 
 <style scoped lang="scss"></style>
