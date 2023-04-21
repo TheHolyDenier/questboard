@@ -9,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="item">
+  <div class="item bordered">
     <h3>
       <BaseIcon v-if="item.leadingIcon" :icon="item.leadingIcon" />
       {{ item.title }}
@@ -25,9 +25,8 @@ defineProps({
 
 <style scoped lang="scss">
 @import 'styles/variables.scss';
+
 .item {
-  border: 1px solid rgba($secondary, 0.5);
-  box-shadow: 1px 1px $secondary;
   border-radius: 15px;
   padding: 1em;
   margin-inline: 1em;

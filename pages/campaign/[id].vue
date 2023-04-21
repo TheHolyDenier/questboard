@@ -43,8 +43,7 @@ watch(
 <template>
   <div v-if="selectedCampaign" class="campaign">
     <BaseCard
-      :bordered="false"
-      :images="selectedCampaign.cover ? [String(selectedCampaign.cover)] : null"
+      :image="selectedCampaign.cover"
       orientation="row"
       style="width: 100%"
     >
@@ -79,6 +78,7 @@ watch(
 
     h1 {
       flex: 1;
+      margin: 0;
     }
   }
 

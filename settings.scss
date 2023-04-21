@@ -66,3 +66,8 @@ h1 {
     cursor: pointer;
   }
 }
+
+.bordered {
+  border: 1px solid rgba($secondary, 0.5);
+  box-shadow: 1px 1px $secondary;
+}
