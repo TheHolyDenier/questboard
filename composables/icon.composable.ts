@@ -1,4 +1,4 @@
-import { flatten } from 'lodash';
+import flatten from 'lodash/flatten';
 
 export const useIcon = () => {
   const credits = [

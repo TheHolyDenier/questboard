@@ -64,7 +64,7 @@ watch(
 
     <ElementCards />
 
-    <CampaignSidebar :campaign="selectedCampaign" />
+    <CampaignSidebar v-if="selectedCampaign" :campaign="selectedCampaign" />
   </div>
 </template>
 

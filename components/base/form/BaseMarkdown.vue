@@ -1,29 +1,34 @@
 <script setup lang="ts">
 import Editor from '@toast-ui/editor';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
+
+const $emit = defineEmits<{
+  (e: 'on:change', value: string): void;
+}>();
 
 const props = defineProps({
-  id: { type: String, required: true },
-  inputValue: { type: String, default: 'Vengaaa' }
+  name: { type: String, required: true },
+  inputValue: { type: String, default: '' }
 });
 
 let editor: Editor;
 
-const onChange = () => {
-  console.log('change!', editor!.getMarkdown());
-};
+const id = `${props.id}-markdown`;
+
+const onChange = () => $emit('on:change', editor!.getMarkdown());
 
 onMounted(() => {
   const { $markdown } = useNuxtApp();
 
   editor = new $markdown({
-    el: document.querySelector(`#${props.id}`)!,
+    el: document.querySelector(`#${id}`)!,
     previewStyle: 'tab',
     height: '500px',
     initialValue: props.inputValue,
     events: {
       change: debounce(onChange, 250, { maxWait: 1000 })
-    }
+    },
+    hideModeSwitch: true
   });
 });
 </script>
