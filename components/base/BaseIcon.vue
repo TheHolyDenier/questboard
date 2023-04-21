@@ -13,31 +13,14 @@ const props = defineProps({
   contrastColor: { type: Boolean }
 });
 
-const backgroundColor = computed(() => {
-  if (['transparent', 'black'].includes(props.color)) {
-    return 'var(--maz-color-text)';
-  }
-
-  if (['white'].includes(props.color)) {
-    return 'var(--maz-bg-color-light)';
-  }
-
-  let color = `var(--maz-color-${props.color}`;
-  if (props.contrastColor) {
-    color += '-contrast';
-  }
-  color += ')';
-  return color;
-});
-
 const src = `/icons/${props.icon}.svg`;
 </script>
 
 <template>
   <span
     class="icon"
+    :class="{ [color]: true, contrast: contrastColor }"
     :style="{
-      backgroundColor: backgroundColor,
       '-webkit-mask': `url(${src}) no-repeat center / contain`,
       mask: `url(${src}) no-repeat center / contain`,
       width: props.size,
@@ -47,8 +30,46 @@ const src = `/icons/${props.icon}.svg`;
 </template>
 
 <style scoped lang="scss">
+@import 'styles/variables.scss';
+
 .icon {
   display: inline-block;
   padding: 0.3em;
+
+  &.primary {
+    background-color: $primary;
+
+    &.contrast {
+      background-color: $green-light;
+    }
+  }
+
+  &.secondary {
+    background-color: $secondary;
+
+    &.contrast {
+      background-color: $primary;
+    }
+  }
+
+  &.black {
+    background-color: $blue;
+
+    &.contrast {
+      background-color: $green-light;
+    }
+  }
+
+  &.transparent {
+    background-color: $blue;
+
+    &.contrast {
+      background-color: $green-light;
+    }
+  }
+
+  &.white {
+    background-color: $green-light;
+  }
 }
 </style>
