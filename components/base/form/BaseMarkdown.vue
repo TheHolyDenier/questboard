@@ -13,7 +13,7 @@ const props = defineProps({
 
 let editor: Editor;
 
-const id = `${props.id}-markdown`;
+const id = `${props.name}-markdown`;
 
 const onChange = () => $emit('on:change', editor!.getMarkdown());
 
