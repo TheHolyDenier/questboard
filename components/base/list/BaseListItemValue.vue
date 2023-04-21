@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import MazCard from 'maz-ui/components/MazCard';
 import { PropType } from 'vue';
 import BaseIcon from '~/components/base/BaseIcon.vue';
 import { ListItemInterface } from '~/interfaces/list-item.interface';
@@ -10,20 +9,31 @@ defineProps({
 </script>
 
 <template>
-  <MazCard :elevation="false" orientation="row" bordered no-padding>
-    <template #title>
-      <h3>
-        <BaseIcon v-if="item.leadingIcon" :icon="item.leadingIcon" />
-        {{ item.title }}
-      </h3>
-    </template>
-    <template v-if="item.subtitle" #subtitle>
+  <div class="item">
+    <h3>
+      <BaseIcon v-if="item.leadingIcon" :icon="item.leadingIcon" />
+      {{ item.title }}
+    </h3>
+    <div v-if="item.subtitle">
       <span> {{ item.subtitle }} </span>
-    </template>
-    <template v-if="$slots.default" #content>
+    </div>
+    <div v-if="$slots.default">
       <slot></slot>
-    </template>
-  </MazCard>
+    </div>
+  </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import 'styles/variables.scss';
+.item {
+  border: 1px solid rgba($secondary, 0.5);
+  box-shadow: 1px 1px $secondary;
+  border-radius: 15px;
+  padding: 1em;
+  margin-inline: 1em;
+
+  h3 {
+    margin: 0;
+  }
+}
+</style>

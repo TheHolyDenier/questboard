@@ -11,7 +11,7 @@ defineEmits<{ (e: 'on:click', value: string): void }>();
 </script>
 
 <template>
-  <div class="list">
+  <div v-if="list?.length" class="list">
     <BaseListItem
       v-for="item of list"
       :key="item.name"
