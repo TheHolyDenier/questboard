@@ -4,11 +4,7 @@ dotenv.config();
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  css: [
-    '@picocss/pico/scss/pico.scss',
-    'maz-ui/css/main.css',
-    '~/settings.scss'
-  ],
+  css: ['@picocss/pico/scss/pico.scss', '~/settings.scss'],
   vite: {
     ssr: {
       noExternal: []
@@ -16,9 +12,6 @@ export default defineNuxtConfig({
     define: {
       'process.env.DEBUG': false
     }
-  },
-  build: {
-    transpile: ['maz-ui']
   },
   modules: ['@pinia/nuxt'],
   // @ts-ignore
