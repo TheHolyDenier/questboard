@@ -15,7 +15,7 @@ defineProps({
   disabled: { type: Boolean, default: false },
   leadingIcon: { type: String as PropType<IconType>, default: null },
   trailingIcon: { type: String as PropType<IconType>, default: null },
-  iconSize: { type: String, default: null }
+  iconSize: { type: String, default: undefined }
 });
 </script>
 

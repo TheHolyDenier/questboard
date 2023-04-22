@@ -45,7 +45,7 @@ watch(
     <BaseCard
       :image="selectedCampaign.cover"
       orientation="row"
-      style="width: 100%"
+      :style="{ width: '100%', padding: '0' }"
     >
       <template #title>
         <div class="campaign__title">
