@@ -23,7 +23,7 @@ export const useCampaign = defineStore('campaign', () => {
   };
 
   const remove = async (id: string) => {
-    await api.campaign.delete(id);
+    await api.campaign.remove(id);
   };
 
   const update = async (id: string, body: FormDataInterface) => {

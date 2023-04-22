@@ -3,58 +3,57 @@ import { FormDataInterface } from '~/interfaces/form-data.interface';
 import { useUser } from '~/stores/user.store';
 import { ApiResponse } from '~/interfaces/api-response';
 
-export class BaseService<T, C = null, U = null> {
-  baseUrl: string;
-  protected Dto: ClassConstructor<T>;
-  protected CreateDto: ClassConstructor<C>;
-  protected UpdateDto: ClassConstructor<U>;
+export const useBaseService = <T, C = null, U = null>(
+  Dto: ClassConstructor<T>,
+  CreateDto?: ClassConstructor<C>,
+  UpdateDto?: ClassConstructor<U>
+) => {
+  const create = CreateDto
+    ? async (baseUrl: string, body: FormDataInterface): Promise<T> => {
+        const user = useUser();
 
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
-  }
+        const result = await $fetch(baseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: user.token()
+          },
+          body: JSON.stringify(
+            plainToInstance(CreateDto, body, {
+              excludeExtraneousValues: true
+            })
+          )
+        });
 
-  async create(body: FormDataInterface): Promise<T> {
+        return plainToInstance(Dto, (result as ApiResponse<T>).data);
+      }
+    : null;
+
+  const update = UpdateDto
+    ? async (baseUrl: string, body: FormDataInterface): Promise<T> => {
+        const user = useUser();
+
+        const result = await $fetch(baseUrl, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: user.token()
+          },
+          body: JSON.stringify(
+            plainToInstance(UpdateDto, body, {
+              excludeExtraneousValues: true
+            })
+          )
+        });
+
+        return plainToInstance(Dto, (result as ApiResponse<T>).data);
+      }
+    : null;
+
+  const get = async (baseUrl: string): Promise<T[]> => {
     const user = useUser();
 
-    const result = await $fetch(this.baseUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: user.token()
-      },
-      body: JSON.stringify(
-        plainToInstance(this.CreateDto, body, {
-          excludeExtraneousValues: true
-        })
-      )
-    });
-
-    return plainToInstance(this.Dto, (result as ApiResponse<T>).data);
-  }
-
-  async update(id: string, body: FormDataInterface): Promise<T> {
-    const user = useUser();
-
-    const result = await $fetch(`${this.baseUrl}/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: user.token()
-      },
-      body: JSON.stringify(
-        plainToInstance(this.UpdateDto, body, {
-          excludeExtraneousValues: true
-        })
-      )
-    });
-
-    return plainToInstance(this.Dto, (result as ApiResponse<T>).data);
-  }
-
-  async get(): Promise<T[]> {
-    const user = useUser();
-
-    const result = await $fetch(this.baseUrl, {
+    const result = await $fetch(baseUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -63,14 +62,14 @@ export class BaseService<T, C = null, U = null> {
     });
 
     return ((result as ApiResponse<T>).data as T[]).map((item) =>
-      plainToInstance(this.Dto, item)
+      plainToInstance(Dto, item)
     );
-  }
+  };
 
-  async getOne(id: string): Promise<T> {
+  const getOne = async (baseUrl: string): Promise<T> => {
     const user = useUser();
 
-    const result = await $fetch(`${this.baseUrl}/${id}`, {
+    const result = await $fetch(baseUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -78,18 +77,20 @@ export class BaseService<T, C = null, U = null> {
       }
     });
 
-    return plainToInstance(this.Dto, (result as ApiResponse<T>).data);
-  }
+    return plainToInstance(Dto, (result as ApiResponse<T>).data);
+  };
 
-  async delete(id: string): Promise<void> {
+  const remove = async (baseUrl: string): Promise<void> => {
     const user = useUser();
 
-    await $fetch(`${this.baseUrl}/${id}`, {
+    await $fetch(baseUrl, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         Authorization: user.token()
       }
     });
-  }
-}
+  };
+
+  return { create, remove, update, getOne, get };
+};
