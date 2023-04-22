@@ -1,6 +1,7 @@
 import { Expose } from 'class-transformer';
+import { BaseDto } from '~/domain/base.dto';
 
-export class CampaignDto {
+export class CampaignDto extends BaseDto {
   @Expose()
   title: string;
 

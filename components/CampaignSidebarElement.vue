@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router';
-import { PropType } from 'vue';
-import { Campaign } from '@prisma/client';
 import { InputDefinitionInterface } from '~/interfaces/input-definition.interface';
 import BaseForm from '~/components/base/form/BaseForm.vue';
 import { OptionInterface } from '~/interfaces/option.interface';
@@ -10,8 +8,8 @@ import { FormDataInterface } from '~/interfaces/form-data.interface';
 import { useSidebar } from '~/composables/sidebar.composable';
 import { useElement } from '~/stores/element.store';
 
-defineProps({
-  campaign: { type: Object as PropType<Campaign>, required: true }
+const props = defineProps({
+  campaignId: { type: String, required: true }
 });
 
 const $icon = useIcon();
@@ -60,7 +58,7 @@ watch(
 const submit = async (body: FormDataInterface) => {
   /*  props.campaign
     ? await $element.update(props.campaign.id, body)
-    : */ await $element.create(body);
+    : */ await $element.create(props.campaignId, body);
   close();
 };
 </script>

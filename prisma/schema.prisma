@@ -37,7 +37,9 @@ model Campaign {
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
-  players PlayerOnCampaign[]
+  players  PlayerOnCampaign[]
+  elements Element[]
+  quests   Quest[]
 
   @@map(name: "campaigns")
 }
@@ -68,11 +70,14 @@ model Element {
 
   isFavorite Boolean?
   exists     Boolean?
-  type       String
+  type       String?
 
   createdById String
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+  campaignId String
 
   elementsOnQuest           ElementOnQuest[]
   mainElementOnElement      ElementOnElement[] @relation("element")
@@ -124,6 +129,9 @@ model Quest {
 
   isFavorite  Boolean?
   isCompleted Boolean?
+
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+  campaignId String
 
   createdById String
   createdAt   DateTime @default(now()) @map(name: "created_at")

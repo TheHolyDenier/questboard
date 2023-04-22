@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { Element, User } from '@prisma/client';
 import { prisma } from '~/server/api';
 import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 
@@ -21,9 +21,13 @@ export class ElementsManager {
     };
   };
 
-  static findMany = async (user: User) => {
-    const data = await prisma.element.findMany({
+  static findMany = async (
+    user: User,
+    campaignId: string
+  ): Promise<Element[]> => {
+    return prisma.element.findMany({
       where: {
+        campaignId,
         OR: [
           { createdById: { equals: user.id } }
           // { players: { some: { id: user.id } } }
@@ -31,11 +35,5 @@ export class ElementsManager {
       },
       orderBy: [{ isFavorite: 'asc' }, { name: 'asc' }]
     });
-
-    return {
-      statusCode: getStatusCode(StatusMessageEnum.OK),
-      statusMessage: StatusMessageEnum.OK,
-      data
-    };
   };
 }

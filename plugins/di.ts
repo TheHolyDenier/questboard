@@ -1,13 +1,13 @@
 import { AuthService } from '~/services/auth.service';
 import { UserService } from '~/services/user.service';
 import { useCampaignService } from '~/services/campaigns.service';
-import { ElementsService } from '~/services/elements.service';
+import { useElementService } from '~/services/elements.service';
 
 export const api = {
   auth: new AuthService(),
   user: new UserService(),
   campaign: useCampaignService(),
-  element: {}
+  element: useElementService()
 };
 
 export default defineNuxtPlugin(() => {

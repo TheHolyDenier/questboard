@@ -19,7 +19,10 @@ export const useIcon = () => {
         'ogre',
         'orc-head',
         'wizard-face',
-        'woman-elf-face'
+        'woman-elf-face',
+        'dagger-rose',
+        'trash-can',
+        'pencil'
       ]
     },
     { author: 'Kier Heyl', icons: ['dwarf-helmet', 'elf-helmet'] },

@@ -4,6 +4,7 @@ import { CampaignsManager } from '~/manager/campaigns.manager';
 import { ApiMethodsEnum } from '~/enums/api-methods.enum';
 import { getStatusCode, StatusMessageEnum } from '~/enums/status-message.enum';
 import { prisma } from '~/server/api';
+import { notFoundError } from '~/errors/not-found.error';
 
 export default defineEventHandler(async (event: H3Event) => {
   const campaign = await CampaignsManager.getParamAndFind(event);
@@ -13,8 +14,10 @@ export default defineEventHandler(async (event: H3Event) => {
       return deleteCampaign(campaign.id);
     case ApiMethodsEnum.PATCH:
       return patchCampaign(campaign.id, event);
-    default:
+    case ApiMethodsEnum.GET:
       return getCampaign(campaign);
+    default:
+      throw notFoundError();
   }
 });
 

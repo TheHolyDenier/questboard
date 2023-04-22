@@ -30,6 +30,7 @@ watch(
   }
 );
 
+const form = useForm();
 const isValid = async () => {
   error.value = false;
   errorMessage.value = null;

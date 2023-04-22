@@ -20,4 +20,7 @@ export type IconType =
   | 'diablo-skull'
   | 'dragon-head'
   | 'visored-helm'
-  | 'cancel';
+  | 'cancel'
+  | 'dagger-rose'
+  | 'trash-can'
+  | 'pencil';

@@ -6,6 +6,7 @@ export const useCampaign = defineStore('campaign', () => {
   const needsRefresh = ref<number>(Date.now());
   const campaigns = ref<CampaignDto[]>([]);
   const selectedCampaign = ref<CampaignDto>();
+  const selectedCampaignId = computed(() => selectedCampaign.value?.id);
 
   const refresh = () => (needsRefresh.value = Date.now());
   const create = async (body: FormDataInterface) => {
@@ -34,6 +35,7 @@ export const useCampaign = defineStore('campaign', () => {
 
   return {
     campaigns,
+    selectedCampaignId,
     selectedCampaign,
     create,
     update,

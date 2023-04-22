@@ -35,6 +35,8 @@ const src = `/icons/${props.icon}.svg`;
 .icon {
   display: inline-block;
   padding: 0.1em;
+  max-width: 70vw;
+  max-height: 70vw;
 
   &.primary {
     background-color: $primary;

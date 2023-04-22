@@ -13,7 +13,7 @@ const onDelete = () => {
 
 <template>
   <BaseButton
-    leading-icon="card-discard"
+    leading-icon="trash-can"
     label="Delete"
     @click="showDialog = true"
   />

@@ -15,7 +15,7 @@ export class UserService {
       }
     });
 
-    return result.data as User;
+    return result.data as unknown as User;
   }
 
   async update(body: UpdateUserDto): Promise<User> {

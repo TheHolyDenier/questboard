@@ -1,11 +1,14 @@
-import { Expose } from 'class-transformer';
+import { Expose, Transform } from 'class-transformer';
 
 export class CreateElementDto {
   @Expose()
   name: string;
 
   @Expose()
-  type: string;
+  campaignId: string;
+
+  @Expose()
+  type?: string;
 
   @Expose()
   description?: string;
@@ -14,8 +17,10 @@ export class CreateElementDto {
   cover?: string;
 
   @Expose()
+  @Transform(({ value }) => !!value)
   isFavorite?: boolean;
 
   @Expose()
+  @Transform(({ value }) => !!value)
   exists?: boolean;
 }

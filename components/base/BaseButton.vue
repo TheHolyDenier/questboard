@@ -55,6 +55,7 @@ button {
   justify-content: center;
   gap: 0.2em;
   margin: 0;
+  line-height: 0.8rem;
 
   &.round {
     padding: 0.2em;

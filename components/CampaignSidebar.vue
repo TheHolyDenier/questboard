@@ -13,7 +13,7 @@ const isElement = computed(() => !!$route.query.element);
 </script>
 
 <template>
-  <CampaignSidebarElement v-if="isElement" />
+  <CampaignSidebarElement v-if="isElement" :campaign-id="campaign.id" />
   <CampaignSidebarUpdate v-else :campaign="campaign" />
 </template>
 
