@@ -15,7 +15,11 @@ defineProps({
       {{ item.title }}
     </h3>
     <div v-if="item.subtitle">
-      <span> {{ item.subtitle }} </span>
+      <BaseMarkdownViewer
+        :name="item.name"
+        :value="item.subtitle"
+        :max-length="100"
+      />
     </div>
     <div v-if="$slots.default">
       <slot></slot>
