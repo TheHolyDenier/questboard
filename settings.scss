@@ -7,6 +7,8 @@
   margin: 0;
   position: relative;
   font-weight: normal;
+  font-family: $poiretFont;
+
 }
 
 
@@ -26,6 +28,11 @@ h1, h2, h3, h4,h5, h6 {
   margin: 0;
   color: $blue;
 }
+
+input {
+  font-family: $poiretFont;
+}
+
 
 a {
   color: inherit;
@@ -86,5 +93,5 @@ h1 {
   left: 0;
   background-color: rgba($blue, 0.8);
   display: flex;
-  z-index: 5;
+  z-index: 25;
 }

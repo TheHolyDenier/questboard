@@ -16,7 +16,7 @@ export default defineEventHandler(
       case ApiMethodsEnum.POST:
         return postElement(campaign.id, event);
       case ApiMethodsEnum.GET:
-        return getElements(campaign.id, event);
+        return getElements(campaign.id);
       default:
         throw notFoundError();
     }
@@ -45,14 +45,11 @@ const postElement = async (campaignId: string, event: H3Event) => {
 };
 
 const getElements = async (
-  campaignId: string,
-  event: H3Event
+  campaignId: string
 ): Promise<ApiResponse<Element>> => {
-  const user = event.context.user;
-
   return {
     statusCode: getStatusCode(StatusMessageEnum.OK),
     statusMessage: StatusMessageEnum.OK,
-    data: await ElementsManager.findMany(user, campaignId)
+    data: await ElementsManager.findMany(campaignId)
   };
 };

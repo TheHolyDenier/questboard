@@ -21,15 +21,12 @@ export class ElementsManager {
     };
   };
 
-  static findMany = async (
-    user: User,
-    campaignId: string
-  ): Promise<Element[]> => {
+  static findMany = async (campaignId: string): Promise<Element[]> => {
     return prisma.element.findMany({
       where: {
         campaignId
       },
-      orderBy: [{ isFavorite: 'asc' }, { name: 'asc' }]
+      orderBy: [{ isFavorite: 'desc' }, { name: 'asc' }]
     });
   };
 }

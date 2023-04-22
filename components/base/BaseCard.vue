@@ -13,7 +13,8 @@ defineProps({
   },
   zoom: { type: Boolean },
   bordered: { type: Boolean },
-  hasAction: { type: Boolean }
+  hasAction: { type: Boolean },
+  hasImageSpace: { type: Boolean, default: true }
 });
 </script>
 
@@ -24,10 +25,14 @@ defineProps({
     :style="{ flexDirection: orientation }"
   >
     <div
-      v-if="image"
+      v-if="hasImageSpace"
       class="card__image"
       :style="{ backgroundImage: `url(${image})` }"
-    ></div>
+    >
+      <div class="card__image__actions">
+        <slot name="actions"></slot>
+      </div>
+    </div>
     <div class="card__container">
       <template v-if="title || $slots.title">
         <slot name="title">
@@ -53,17 +58,34 @@ defineProps({
 
 .card {
   display: flex;
-  padding: 1em;
+  flex-wrap: wrap;
 
   &__image {
     flex: 1;
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    min-width: 150px;
+    min-height: 150px;
+    background-color: $blue;
+
+    &__actions {
+      display: flex;
+      gap: 0.5em;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.4em;
+    }
   }
 
   &__container {
+    padding: 1em;
     flex: 4;
+
+    * > {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
 
@@ -72,5 +94,6 @@ defineProps({
   background-size: $patternBackgroundSize;
   padding: 0.5em;
   color: $patternBackgroundContrast;
+  width: 100%;
 }
 </style>

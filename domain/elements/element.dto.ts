@@ -1,5 +1,6 @@
 import { Expose } from 'class-transformer';
 import { BaseDto } from '~/domain/base.dto';
+import { IconType } from '~/types/icon.type';
 
 export class ElementDto extends BaseDto {
   @Expose() name?: string;
@@ -7,5 +8,5 @@ export class ElementDto extends BaseDto {
   @Expose() cover?: string;
   @Expose() isFavorite?: boolean;
   @Expose() exists?: boolean;
-  @Expose() type: string;
+  @Expose() type: IconType;
 }

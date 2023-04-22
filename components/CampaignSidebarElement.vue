@@ -59,6 +59,7 @@ const submit = async (body: FormDataInterface) => {
   /*  props.campaign
     ? await $element.update(props.campaign.id, body)
     : */ await $element.create(props.campaignId, body);
+  $element.refresh();
   close();
 };
 </script>

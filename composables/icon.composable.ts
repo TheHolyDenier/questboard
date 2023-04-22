@@ -26,8 +26,11 @@ export const useIcon = () => {
       ]
     },
     { author: 'Kier Heyl', icons: ['dwarf-helmet', 'elf-helmet'] },
-    { author: 'Skoll', icons: ['troll'] },
-    { author: 'Lorc', icons: ['diablo-skull', 'dragon-head', 'visored-helm'] },
+    { author: 'Skoll', icons: ['troll', 'hearts'] },
+    {
+      author: 'Lorc',
+      icons: ['diablo-skull', 'dragon-head', 'visored-helm', 'carrion']
+    },
     { author: 'sbed', icons: ['cancel'] }
   ];
 

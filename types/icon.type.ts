@@ -23,4 +23,6 @@ export type IconType =
   | 'cancel'
   | 'dagger-rose'
   | 'trash-can'
-  | 'pencil';
+  | 'pencil'
+  | 'carrion'
+  | 'hearts';

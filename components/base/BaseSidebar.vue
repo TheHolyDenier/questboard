@@ -39,7 +39,7 @@ const close = () => sidebar.close();
 .background {
   justify-content: flex-end;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: $phoneWidth) {
     justify-content: flex-start;
   }
 

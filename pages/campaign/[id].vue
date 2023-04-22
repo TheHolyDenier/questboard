@@ -48,7 +48,7 @@ watch(
       :style="{ width: '100%', padding: '0' }"
     >
       <template #title>
-        <div class="campaign__title">
+        <div class="campaign__title" :style="{ width: '100%', padding: '0' }">
           <h1>
             {{ selectedCampaign.title }}
           </h1>
@@ -57,7 +57,11 @@ watch(
         </div>
       </template>
       <template #subtitle>
-        <p class="campaign__subtitle">{{ selectedCampaign.summary }}</p>
+        <BaseMarkdownViewer
+          :name="selectedCampaign.id"
+          :value="selectedCampaign.summary"
+          :max-length="150"
+        />
       </template>
     </BaseCard>
 
@@ -80,10 +84,6 @@ watch(
       flex: 1;
       margin: 0;
     }
-  }
-
-  &__subtitle {
-    margin-inline-start: 1em;
   }
 }
 </style>

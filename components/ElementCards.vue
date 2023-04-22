@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useSidebar } from '~/composables/sidebar.composable';
-import CreateCard from '~/components/CreateCard.vue';
 import { useElement } from '~/stores/element.store';
-import ElementCard from '~/components/base/ElementCard.vue';
 
 const $sidebar = useSidebar();
 const $router = useRouter();
 const $element = useElement();
 
 const { elements } = storeToRefs($element);
-$element.get();
+
+watch(
+  () => $element.needsRefresh,
+  () => $element.get(),
+  { immediate: true }
+);
 
 const open = async () => {
   await $router.replace({ query: { element: 'true' } });
@@ -40,15 +43,17 @@ const open = async () => {
     margin-block: 1em 0;
     border-top: 1px dashed $blue;
   }
+
   &__list {
     margin-block: 1em;
     max-width: calc(100vw - 2em);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 300px));
+    grid-auto-rows: 1fr;
     grid-gap: 1em;
 
-    > * {
-      max-width: 300px;
+    @media only screen and (max-width: $phoneWidth) {
+      justify-content: center;
     }
   }
 }

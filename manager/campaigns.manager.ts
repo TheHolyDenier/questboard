@@ -35,7 +35,7 @@ export class CampaignsManager {
           { players: { some: { id: user.id } } }
         ]
       },
-      orderBy: [{ isFavorite: 'asc' }, { title: 'asc' }]
+      orderBy: [{ isFavorite: 'desc' }, { title: 'asc' }]
     });
   };
 }
