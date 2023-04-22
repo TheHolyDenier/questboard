@@ -3,11 +3,15 @@ import { FormDataInterface } from '~/interfaces/form-data.interface';
 import { CampaignDto } from '~/domain/campaigns/campaign.dto';
 
 export const useCampaign = defineStore('campaign', () => {
+  const $route = useRoute();
   const needsRefresh = ref<number>(Date.now());
   const loading = ref(false);
   const campaigns = ref<CampaignDto[]>([]);
+
   const selectedCampaign = ref<CampaignDto>();
-  const selectedCampaignId = computed(() => selectedCampaign.value?.id);
+  const selectedCampaignId = computed(() =>
+    $route.params.campaignId ? String($route.params.campaignId) : null
+  );
 
   const refresh = () => (needsRefresh.value = Date.now());
   const create = async (body: FormDataInterface) => {
