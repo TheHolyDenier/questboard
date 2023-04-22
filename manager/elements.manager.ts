@@ -27,11 +27,7 @@ export class ElementsManager {
   ): Promise<Element[]> => {
     return prisma.element.findMany({
       where: {
-        campaignId,
-        OR: [
-          { createdById: { equals: user.id } }
-          // { players: { some: { id: user.id } } }
-        ]
+        campaignId
       },
       orderBy: [{ isFavorite: 'asc' }, { name: 'asc' }]
     });
