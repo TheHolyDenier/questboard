@@ -105,7 +105,10 @@ const submit = () => {
   }
 
   &__actions {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1em;
   }
 }
 </style>

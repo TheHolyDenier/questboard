@@ -11,26 +11,34 @@ defineProps({
     type: String as PropType<ColorType>,
     default: 'primary'
   },
-  circle: { type: Boolean, default: false },
+  round: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   leadingIcon: { type: String as PropType<IconType>, default: null },
-  trailingIcon: { type: String as PropType<IconType>, default: null }
+  trailingIcon: { type: String as PropType<IconType>, default: null },
+  iconSize: { type: String, default: null }
 });
 </script>
 
 <template>
   <div>
-    <button :class="color">
+    <button :class="{ [color]: true, round: round }">
       <BaseIcon
         v-if="leadingIcon"
         :icon="leadingIcon"
         :color="color"
         contrast-color
+        :size="iconSize"
       />
 
       <span>{{ label }}</span>
 
-      <BaseIcon v-if="trailingIcon" :icon="trailingIcon" />
+      <BaseIcon
+        v-if="trailingIcon"
+        :icon="trailingIcon"
+        :color="color"
+        contrast-color
+        :size="iconSize"
+      />
     </button>
   </div>
 </template>
@@ -48,6 +56,12 @@ button {
   gap: 0.2em;
   margin: 0;
 
+  &.round {
+    padding: 0.2em;
+    border-radius: 100%;
+    gap: 0;
+  }
+
   &.primary {
     color: $green-light;
     background-color: $primary;
@@ -64,8 +78,8 @@ button {
   }
 
   &.transparent {
-    color: $green-light;
-    background-color: $blue;
+    color: $blue;
+    background-color: transparent;
   }
 
   &.white {

@@ -24,7 +24,8 @@ export const useIcon = () => {
     },
     { author: 'Kier Heyl', icons: ['dwarf-helmet', 'elf-helmet'] },
     { author: 'Skoll', icons: ['troll'] },
-    { author: 'Lorc', icons: ['diablo-skull', 'dragon-head', 'visored-helm'] }
+    { author: 'Lorc', icons: ['diablo-skull', 'dragon-head', 'visored-helm'] },
+    { author: 'sbed', icons: ['cancel'] }
   ];
 
   const icons = flatten(credits.map((credit) => credit.icons));

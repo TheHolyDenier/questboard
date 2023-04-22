@@ -1,7 +1,6 @@
 export type IconType =
-  | 'scroll-quill'
-  | 'card-joker'
   | 'card-discard'
+  | 'card-joker'
   | 'wood-cabin'
   | 'barbarian'
   | 'dwarf-face'
@@ -20,4 +19,5 @@ export type IconType =
   | 'troll'
   | 'diablo-skull'
   | 'dragon-head'
-  | 'visored-helm';
+  | 'visored-helm'
+  | 'cancel';

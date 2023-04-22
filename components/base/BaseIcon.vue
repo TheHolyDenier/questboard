@@ -9,7 +9,7 @@ const props = defineProps({
     type: String as PropType<ColorType>,
     default: 'primary'
   },
-  size: { type: String, default: '16px' },
+  size: { type: String, default: '18px' },
   contrastColor: { type: Boolean }
 });
 
@@ -23,8 +23,8 @@ const src = `/icons/${props.icon}.svg`;
     :style="{
       '-webkit-mask': `url(${src}) no-repeat center / contain`,
       mask: `url(${src}) no-repeat center / contain`,
-      width: props.size,
-      height: props.size
+      width: size,
+      height: size
     }"
   ></span>
 </template>
@@ -34,7 +34,7 @@ const src = `/icons/${props.icon}.svg`;
 
 .icon {
   display: inline-block;
-  padding: 0.3em;
+  padding: 0.1em;
 
   &.primary {
     background-color: $primary;
@@ -62,10 +62,6 @@ const src = `/icons/${props.icon}.svg`;
 
   &.transparent {
     background-color: $blue;
-
-    &.contrast {
-      background-color: $green-light;
-    }
   }
 
   &.white {

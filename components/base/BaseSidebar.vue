@@ -17,8 +17,15 @@ const close = () => sidebar.close();
           <h2>
             {{ title }}
           </h2>
+          <BaseButton
+            leading-icon="cancel"
+            round
+            color="transparent"
+            icon-size="25px"
+            @click="close"
+          />
         </div>
-        <div>
+        <div class="sidebar__content">
           <slot></slot>
         </div>
       </div>
@@ -49,6 +56,9 @@ const close = () => sidebar.close();
       background-color: $secondary;
       padding-inline: 1em;
       padding-block: 1.5em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       h2 {
         margin: 0;
       }
