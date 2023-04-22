@@ -10,8 +10,8 @@ defineProps({
 <template>
   <BaseCard bordered has-action :image="element.cover">
     <template #actions>
-      <BaseIcon v-if="!element.exists" icon="carrion" />
-      <BaseIcon v-if="element.isFavorite" icon="hearts" />
+      <BaseIcon v-if="!element.exists" icon="carrion" tooltip="Doesn't exist" />
+      <BaseIcon v-if="element.isFavorite" icon="hearts" tooltip="Is favorite" />
     </template>
     <h2>
       <BaseIcon v-if="element.type" :icon="element.type" />{{ element.name }}

@@ -10,7 +10,8 @@ const props = defineProps({
     default: 'primary'
   },
   size: { type: String, default: '18px' },
-  contrastColor: { type: Boolean }
+  contrastColor: { type: Boolean },
+  tooltip: { type: String, default: undefined }
 });
 
 const src = `/icons/${props.icon}.svg`;
@@ -26,6 +27,8 @@ const src = `/icons/${props.icon}.svg`;
       width: size,
       height: size
     }"
+    :data-tooltip="tooltip"
+    data-placement="top"
   ></span>
 </template>
 
