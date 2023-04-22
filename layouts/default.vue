@@ -21,7 +21,8 @@ defineProps({
 <style lang="scss" scoped>
 .layout {
   position: relative;
-  padding-inline: 1em;
+  padding: 1em;
+  overflow: hidden;
 
   &__navigation {
     position: sticky;

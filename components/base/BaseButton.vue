@@ -21,7 +21,7 @@ defineProps({
 
 <template>
   <div>
-    <button :class="{ [color]: true, round: round }">
+    <button class="button" :class="{ [color]: true, round: round }">
       <BaseIcon
         v-if="leadingIcon"
         :icon="leadingIcon"
@@ -48,7 +48,6 @@ defineProps({
 
 button {
   padding: 0.5em;
-  font-family: $bebasNeueFont !important;
   border: 0;
   display: flex;
   align-items: center;
@@ -56,6 +55,10 @@ button {
   gap: 0.2em;
   margin: 0;
   line-height: 0.8rem;
+
+  span {
+    font-family: $titleFont;
+  }
 
   &.round {
     padding: 0.2em;

@@ -15,24 +15,37 @@ $patternBackgroundContrast: $blue;
 
 
 @font-face {
-  font-family: 'BebasNeue';
-  src: url('public/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-family: 'VinaSans';
+  src: url('public/fonts/VinaSans-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 
 @font-face {
-  font-family: 'PoiretOne';
-  src: url('public/fonts/PoiretOne-Regular.ttf') format('truetype');
+  font-family: 'OpenSans';
+  src: url('public/fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
-$poiretFont: 'PoiretOne', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+
+@font-face {
+  font-family: 'Zeyada';
+  src: url('public/fonts/Zeyada-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+$textFont: 'OpenSans', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
 roboto, oxygen, ubuntu, cantarell, 'Fira Sans', 'Droid Sans',
 'Helvetica Neue', sans-serif;
 
-$bebasNeueFont: 'BebasNeue', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+$titleFont: 'VinaSans', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+roboto, oxygen, ubuntu, cantarell, 'Fira Sans', 'Droid Sans',
+'Helvetica Neue', sans-serif;
+
+$accentFont: 'Zeyada', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
 roboto, oxygen, ubuntu, cantarell, 'Fira Sans', 'Droid Sans',
 'Helvetica Neue', sans-serif;

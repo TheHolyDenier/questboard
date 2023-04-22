@@ -36,7 +36,7 @@ watch(
         <BaseList :list="campaigns" />
       </div>
       <div>
-        <BaseCard title="Create campaign">
+        <BaseCard title="Create campaign" :has-image-space="false" bordered>
           <CampaignForm />
         </BaseCard>
       </div>

@@ -17,8 +17,8 @@ defineProps({
 @import 'styles/variables';
 
 label {
-  font-family: $bebasNeueFont;
-  font-size: 1.2em;
-  font-weight: 700;
+  font-family: $titleFont;
+  font-size: 1.3em;
+  font-weight: 400;
 }
 </style>

@@ -82,7 +82,7 @@ defineProps({
     padding: 1em;
     flex: 4;
 
-    * > {
+    > * {
       width: 100%;
       text-align: center;
     }
