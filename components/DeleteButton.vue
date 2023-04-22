@@ -1,33 +1,37 @@
 <script setup lang="ts">
-import MazDialogPromise, {
-  useMazDialogPromise
-} from 'maz-ui/components/MazDialogPromise';
+import BaseDialog from '~/components/base/BaseDialog.vue';
 
-const { showDialogAndWaitChoice } = useMazDialogPromise();
+const $emit = defineEmits<{ (e: 'on:delete'): void }>();
 
-const emits = defineEmits<{ (e: 'on:delete'): void }>();
-
-const askConfirm = async () => {
-  try {
-    const response = await showDialogAndWaitChoice('dialog');
-    if (response) emits('on:delete');
-  } catch (error) {
-    console.error(error);
-  }
+const showDialog = ref(true);
+const onDelete = () => {
+  $emit('on:delete');
+  showDialog.value = false;
 };
 </script>
 
 <template>
-  <BaseButton leading-icon="card-discard" label="Delete" @click="askConfirm" />
+  <BaseButton
+    leading-icon="card-discard"
+    label="Delete"
+    @click="showDialog = true"
+  />
 
-  <MazDialogPromise identifier="dialog">
-    <template #title> Are you sure you want to delete? </template>
-    <template #default> This action cannot be undone.</template>
-    <template #footer-button="{ reject, resolve }">
-      <BaseButton label="Delete" @click="resolve" />
-      <BaseButton label="Cancel" color="transparent" @click="reject" />
+  <BaseDialog
+    v-if="showDialog"
+    title="Are you sure you want to delete?"
+    @on:cancel="showDialog = false"
+  >
+    <template #default>This action cannot be undone.</template>
+    <template #actions>
+      <BaseButton label="Delete" @click="onDelete" />
+      <BaseButton
+        label="Cancel"
+        color="transparent"
+        @click="showDialog = false"
+      />
     </template>
-  </MazDialogPromise>
+  </BaseDialog>
 </template>
 
 <style scoped lang="scss"></style>

@@ -30,14 +30,6 @@ const close = () => sidebar.close();
 @import 'styles/variables.scss';
 
 .background {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  //left: 0;
-  width: 100%;
-  background-color: rgba($blue, 0.8);
-  display: flex;
   justify-content: flex-end;
 
   @media only screen and (max-width: 600px) {

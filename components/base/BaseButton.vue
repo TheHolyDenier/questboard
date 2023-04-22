@@ -46,6 +46,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 0.2em;
+  margin: 0;
 
   &.primary {
     color: $green-light;

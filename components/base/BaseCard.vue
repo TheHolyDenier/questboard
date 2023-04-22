@@ -53,8 +53,6 @@ defineProps({
 
 .card {
   display: flex;
-  border-radius: 15px;
-  overflow: hidden;
 
   &__image {
     flex: 1;

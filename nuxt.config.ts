@@ -5,14 +5,7 @@ dotenv.config();
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: ['@picocss/pico/scss/pico.scss', '~/settings.scss'],
-  vite: {
-    ssr: {
-      noExternal: []
-    },
-    define: {
-      'process.env.DEBUG': false
-    }
-  },
+  vite: {},
   modules: ['@pinia/nuxt'],
   // @ts-ignore
   pinia: {

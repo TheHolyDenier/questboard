@@ -56,16 +56,33 @@ h1 {
 }
 
 
-.card.active {
-  transition: transform 0.3s ease;
+.card {
+  background-color: $green-light;
+  border-radius: 15px;
+  overflow: hidden;
 
-  &:hover {
-    transform: scale(1.05);
-    cursor: pointer;
+  &.active {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
   }
 }
 
 .bordered {
   border: 1px solid rgba($secondary, 0.5);
   box-shadow: 1px 1px $secondary;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba($blue, 0.8);
+  display: flex;
+  z-index: 5;
 }
