@@ -1,4 +1,4 @@
-import { H3Event } from 'h3';
+import { defineEventHandler, H3Event, readBody } from 'h3';
 import { Campaign } from '@prisma/client';
 import { CampaignsManager } from '~/manager/campaigns.manager';
 import { ApiMethodsEnum } from '~/enums/api-methods.enum';

@@ -6,6 +6,7 @@ dotenv.config();
 export default defineNuxtConfig({
   css: ['@picocss/pico/scss/pico.scss', '~/settings.scss'],
   vite: {},
+  ssr: false,
   modules: ['@pinia/nuxt'],
   // @ts-ignore
   pinia: {

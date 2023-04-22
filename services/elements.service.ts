@@ -11,7 +11,9 @@ export const useElementService = () => {
     UpdateElementDto
   );
   const baseUrl = (campaignId: string, id?: string) =>
-    `/api/secure/campaigns/${campaignId}/elements${id ? `/${id}` : ''}`;
+    id
+      ? `/api/secure/elements/${id}`
+      : `/api/secure/campaigns/${campaignId}/elements`;
 
   return {
     create: async (campaignId: string, body: FormDataInterface) =>

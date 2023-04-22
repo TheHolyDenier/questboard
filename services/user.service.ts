@@ -7,7 +7,7 @@ export class UserService {
   async getMe() {
     const user = useUser();
 
-    const result = await $fetch('/api/secure/users', {
+    const result: ApiResponse<User> = await $fetch('/api/secure/users', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ export class UserService {
       }
     });
 
-    return result.data as unknown as User;
+    return result.data;
   }
 
   async update(body: UpdateUserDto): Promise<User> {
