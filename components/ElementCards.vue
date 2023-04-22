@@ -2,12 +2,14 @@
 import { storeToRefs } from 'pinia';
 import { useSidebar } from '~/composables/sidebar.composable';
 import { useElement } from '~/stores/element.store';
+import { useCampaign } from '~/stores/campaign.store';
 
 const $sidebar = useSidebar();
 const $router = useRouter();
 const $element = useElement();
 
 const { elements } = storeToRefs($element);
+const { selectedCampaignId } = useCampaign();
 
 watch(
   () => $element.needsRefresh,
@@ -18,6 +20,13 @@ watch(
 const open = async () => {
   await $router.replace({ query: { element: 'true' } });
   return $sidebar.open();
+};
+
+const openElement = (elementId: string) => {
+  $router.push({
+    name: 'campaigns-campaignId-elements-elementId',
+    params: { campaignId: selectedCampaignId, elementId }
+  });
 };
 </script>
 
@@ -30,6 +39,7 @@ const open = async () => {
         v-for="element of elements"
         :key="element.id"
         :element="element"
+        @click="openElement(element.id)"
       />
     </div>
   </div>

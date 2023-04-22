@@ -2,14 +2,19 @@
 import { PropType } from 'vue';
 import { Campaign } from '@prisma/client';
 import { useSidebar } from '~/composables/sidebar.composable';
+import { useCampaign } from '~/stores/campaign.store';
 
 defineProps({
   campaign: { type: Object as PropType<Campaign>, required: true }
 });
 
 const sidebar = useSidebar();
+const $campaign = useCampaign();
 
-const close = () => sidebar.close();
+const close = () => {
+  $campaign.refresh();
+  return sidebar.close();
+};
 </script>
 
 <template>

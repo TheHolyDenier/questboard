@@ -13,7 +13,7 @@ const campaigns = computed(() =>
     name: campaign.id,
     title: campaign.title,
     subtitle: campaign.summary || undefined,
-    to: { name: 'campaign-id', params: { id: campaign.id } },
+    to: { name: 'campaigns-campaignId', params: { campaignId: campaign.id } },
     leadingIcon: 'scroll-quill'
   }))
 );

@@ -15,8 +15,8 @@ const $route = useRoute();
 const $router = useRouter();
 const $campaign = useCampaign();
 
-const id = computed(() => String($route.params.id));
-const { selectedCampaign } = storeToRefs($campaign);
+const id = computed(() => String($route.params.campaignId));
+const { selectedCampaign, loading } = storeToRefs($campaign);
 
 onMounted(() => {
   $campaign.getOne(id.value);
@@ -26,7 +26,7 @@ const open = () => $sidebar.open();
 
 const remove = async () => {
   await $campaign.remove(id.value);
-  await $router.replace({ name: 'campaign' });
+  await $router.replace({ name: 'campaigns' });
 };
 
 watch(
@@ -41,7 +41,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="selectedCampaign" class="campaign">
+  <div v-if="selectedCampaign && !loading" class="campaign">
     <BaseCard
       :image="selectedCampaign.cover"
       orientation="row"
@@ -69,6 +69,7 @@ watch(
 
     <CampaignSidebar v-if="selectedCampaign" :campaign="selectedCampaign" />
   </div>
+  <BaseLoading v-else />
 </template>
 
 <style scoped lang="scss">
