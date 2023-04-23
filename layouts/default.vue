@@ -1,9 +1,7 @@
 <template>
   <div class="layout">
     <div class="layout__navigation">
-      <RouterLink :to="{ name: 'index' }">
-        <BaseButton leading-icon="wood-cabin" color="transparent" />
-      </RouterLink>
+      <TheBreadcrumb />
       <MiniProfile></MiniProfile>
     </div>
     <div class="layout__container">
@@ -13,6 +11,8 @@
 </template>
 
 <script lang="ts" setup>
+import TheBreadcrumb from '~/components/unique/TheBreadcrumb.vue';
+
 defineProps({
   title: { type: String, default: null }
 });

@@ -40,6 +40,10 @@ a {
   text-decoration: none;
   font-family: $accentFont;
   font-size: 1.2rem;
+
+  &:hover {
+    color: $secondary;
+  }
 }
 
 strong, em {

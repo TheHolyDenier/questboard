@@ -7,6 +7,7 @@ import CampaignSidebar from '~/components/CampaignSidebar.vue';
 import ElementCards from '~/components/ElementCards.vue';
 import HeaderCard from '~/components/HeaderCard.vue';
 import { useElement } from '~/stores/element.store';
+import { useBreadcrumb } from '~/stores/breadcrumb.store';
 
 definePageMeta({
   middleware: 'auth'
@@ -17,6 +18,7 @@ const $route = useRoute();
 const $router = useRouter();
 const $campaign = useCampaign();
 const $element = useElement();
+const $breadCrumb = useBreadcrumb();
 
 const { selectedCampaign, loading } = storeToRefs($campaign);
 
@@ -30,6 +32,16 @@ const remove = async () => {
   await $campaign.remove(selectedCampaignId.value!);
   await $router.replace({ name: 'campaigns' });
 };
+
+watch(
+  () => $campaign.selectedCampaign,
+  () =>
+    $breadCrumb.update(
+      'campaignId',
+      $campaign.selectedCampaign?.id,
+      $campaign.selectedCampaign?.title
+    )
+);
 
 watch(
   () => $campaign.needsRefresh,
