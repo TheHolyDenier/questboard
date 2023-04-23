@@ -8,7 +8,7 @@ const id = `${props.name}-markdown`;
 
 const description = computed(() => {
   const text = props.value || '';
-  const textIsLonger = text.length > props.maxLength;
+  const textIsLonger = props.maxLength !== 0 && text.length > props.maxLength;
   return textIsLonger ? `${text.substring(0, props.maxLength)}...` : text;
 });
 

@@ -41,6 +41,7 @@ watch(
     :image="selectedElement?.cover"
     :title="selectedElement?.name"
     :loading="!selectedElement || loading"
+    :max-length="0"
   ></HeaderCard>
 </template>
 
