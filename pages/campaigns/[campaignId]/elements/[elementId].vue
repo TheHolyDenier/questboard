@@ -6,15 +6,19 @@ const $route = useRoute();
 const $element = useElement();
 
 const elementId = computed(() => String($route.params.elementId));
-const { selectedElement } = storeToRefs($element);
+const { selectedElement, loading } = storeToRefs($element);
 
 onMounted(() => $element.getOne(elementId.value));
 </script>
 
 <template>
-  <div>
-    {{ selectedElement }}
-  </div>
+  <HeaderCard
+    :id="selectedElement?.id"
+    :markdown-text="selectedElement?.description"
+    :image="selectedElement?.cover"
+    :title="selectedElement?.name"
+    :loading="!selectedElement || loading"
+  ></HeaderCard>
 </template>
 
 <style scoped lang="scss"></style>

@@ -5,6 +5,7 @@ import { useCampaign } from '~/stores/campaign.store';
 import { useSidebar } from '~/composables/sidebar.composable';
 import CampaignSidebar from '~/components/CampaignSidebar.vue';
 import ElementCards from '~/components/ElementCards.vue';
+import HeaderCard from '~/components/HeaderCard.vue';
 
 definePageMeta({
   middleware: 'auth'
@@ -41,50 +42,19 @@ watch(
 </script>
 
 <template>
-  <div v-if="selectedCampaign && !loading" class="campaign">
-    <BaseCard
-      :image="selectedCampaign.cover"
-      orientation="row"
-      :style="{ width: '100%', padding: '0' }"
-    >
-      <template #title>
-        <div class="campaign__title" :style="{ width: '100%', padding: '0' }">
-          <h1>
-            {{ selectedCampaign.title }}
-          </h1>
-          <DeleteButton @on:delete="remove" />
-          <EditButton @click="open" />
-        </div>
-      </template>
-      <template #subtitle>
-        <BaseMarkdownViewer
-          :name="selectedCampaign.id"
-          :value="selectedCampaign.summary"
-          :max-length="150"
-        />
-      </template>
-    </BaseCard>
-
+  <HeaderCard
+    :id="selectedCampaign?.id"
+    :loading="!selectedCampaign || loading"
+    :title="selectedCampaign?.title"
+    :image="selectedCampaign?.cover"
+    :markdown-text="selectedCampaign?.summary"
+    @on:delete="remove"
+    @on:update="open"
+  >
     <ElementCards />
 
     <CampaignSidebar v-if="selectedCampaign" :campaign="selectedCampaign" />
-  </div>
-  <BaseLoading v-else />
+  </HeaderCard>
 </template>
 
-<style scoped lang="scss">
-.campaign {
-  &__title {
-    display: flex;
-    gap: 1em;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    h1 {
-      flex: 1;
-      margin: 0;
-    }
-  }
-}
-</style>
+<style scoped lang="scss"></style>
