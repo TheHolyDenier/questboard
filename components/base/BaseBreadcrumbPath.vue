@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
-import { NavigationInterface } from '~/interfaces/navigation.interface';
+import { Navigation } from '~/utils/navigation';
 
 defineProps({
-  path: { type: Object as PropType<NavigationInterface>, required: true },
+  path: { type: Object as PropType<Navigation>, required: true },
   hasAction: { type: Boolean }
 });
 </script>

@@ -35,14 +35,20 @@ watch(
 </script>
 
 <template>
-  <HeaderCard
-    :id="selectedElement?.id"
-    :markdown-text="selectedElement?.description"
-    :image="selectedElement?.cover"
-    :title="selectedElement?.name"
-    :loading="!selectedElement || loading"
-    :max-length="0"
-  ></HeaderCard>
+  <div>
+    <HeaderCard
+      :image="selectedElement?.cover"
+      :title="selectedElement?.name"
+      :loading="!selectedElement || loading"
+    ></HeaderCard>
+
+    <BaseMarkdownViewer
+      v-if="selectedElement"
+      :name="selectedElement.id"
+      :value="selectedElement.description"
+      :max-length="0"
+    />
+  </div>
 </template>
 
 <style scoped lang="scss"></style>

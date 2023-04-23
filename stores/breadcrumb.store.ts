@@ -1,9 +1,9 @@
-import { NavigationInterface } from '~/interfaces/navigation.interface';
+import { Navigation } from '~/utils/navigation';
 
 export const useBreadcrumb = defineStore('breadcrumb', () => {
-  const navigation: NavigationInterface[] = reactive([
+  const navigation: Navigation[] = reactive([
     {
-      name: '/',
+      name: 'index',
       icon: 'wood-cabin'
     },
     {

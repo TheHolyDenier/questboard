@@ -69,21 +69,37 @@ button {
   &.primary {
     color: $green-light;
     background-color: $primary;
+
+    &:hover {
+      background-color: $primary-dark;
+    }
   }
 
   &.secondary {
     color: $blue;
     background-color: $secondary;
+
+    &:hover {
+      background-color: $secondary-dark;
+    }
   }
 
   &.black {
     color: $green-light;
     background-color: $blue;
+
+    &:hover {
+      background-color: $blue-dark;
+    }
   }
 
   &.transparent {
     color: $blue;
     background-color: transparent;
+
+    &:hover {
+      background-color: rgba($blue, 0.1);
+    }
   }
 
   &.white {
@@ -91,6 +107,10 @@ button {
     color: $blue;
     border: 1px solid $blue;
     border-right: 7px;
+
+    &:hover {
+      background-color: rgba($blue, 0.1);
+    }
   }
 }
 </style>
