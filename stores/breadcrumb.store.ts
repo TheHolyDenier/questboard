@@ -1,11 +1,12 @@
 import { RouteLocationRaw } from 'vue-router';
+import { storeToRefs } from 'pinia';
 import { NavigationInterface } from '~/interfaces/navigation.interface';
 import { useCampaign } from '~/stores/campaign.store';
 import { useElement } from '~/stores/element.store';
 
 export const useBreadcrumb = defineStore('breadcrumb', () => {
-  const $campaign = useCampaign();
-  const $element = useElement();
+  const { selectedCampaign } = storeToRefs(useCampaign());
+  const { selectedElement } = storeToRefs(useElement());
 
   const navigation = computed<NavigationInterface[]>(() => [
     {
@@ -16,29 +17,28 @@ export const useBreadcrumb = defineStore('breadcrumb', () => {
     {
       name: 'campaigns-campaignId',
       label:
-        $campaign.selectedCampaign?.title ||
-        $element.selectedElement?.campaign?.title,
+        selectedCampaign.value?.title || selectedElement.value?.campaign?.title,
       getTo:
-        $campaign.selectedCampaign || $element.selectedElement
+        selectedCampaign.value || selectedElement.value
           ? (): RouteLocationRaw => ({
               name: 'campaigns-campaignId',
               params: {
                 campaignId:
-                  $campaign.selectedCampaign?.id ||
-                  $element.selectedElement?.campaignId
+                  selectedCampaign.value?.id ||
+                  selectedElement.value?.campaignId
               }
             })
           : undefined
     },
     {
       name: 'campaigns-campaignId-elements-elementId',
-      label: $element.selectedElement?.name,
-      getTo: $element.selectedElement
+      label: selectedElement.value?.name,
+      getTo: selectedElement.value
         ? (): RouteLocationRaw => ({
             name: 'campaigns-campaignId-elements-elementId',
             params: {
-              campaignId: $element.selectedElement!.campaignId,
-              elementId: $element.selectedElement!.name
+              campaignId: selectedElement.value!.campaignId,
+              elementId: selectedElement.value!.name
             }
           })
         : undefined
