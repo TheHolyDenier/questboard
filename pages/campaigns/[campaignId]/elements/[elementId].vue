@@ -5,10 +5,18 @@ import { useElement } from '~/stores/element.store';
 const $route = useRoute();
 const $element = useElement();
 
-const elementId = computed(() => String($route.params.elementId));
 const { selectedElement, loading } = storeToRefs($element);
 
-onMounted(() => $element.getOne(elementId.value));
+onUnmounted(() => $element.clearSelected());
+
+watch(
+  () => $route.params.elementId,
+  (elementId) => {
+    if (!elementId) return;
+    $element.getOne(String(elementId));
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
