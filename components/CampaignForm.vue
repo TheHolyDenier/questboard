@@ -22,7 +22,7 @@ const inputDefinitions: InputDefinitionInterface[] = [
 const $campaign = useCampaign();
 const submit = async (body: FormDataInterface) => {
   props.campaign
-    ? await $campaign.update(props.campaign.id, body)
+    ? await $campaign.update(body, props.campaign.id)
     : await $campaign.create(body);
   emit('on:success');
 };

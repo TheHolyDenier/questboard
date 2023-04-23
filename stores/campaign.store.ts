@@ -3,15 +3,11 @@ import { FormDataInterface } from '~/interfaces/form-data.interface';
 import { CampaignDto } from '~/domain/campaigns/campaign.dto';
 
 export const useCampaign = defineStore('campaign', () => {
-  const $route = useRoute();
   const needsRefresh = ref<number>(Date.now());
   const loading = ref(false);
   const campaigns = ref<CampaignDto[]>([]);
 
-  const selectedCampaign = ref<CampaignDto>();
-  const selectedCampaignId = computed(() =>
-    $route.params.campaignId ? String($route.params.campaignId) : null
-  );
+  const selectedCampaign = ref<CampaignDto | null>(null);
 
   const refresh = () => (needsRefresh.value = Date.now());
   const create = async (body: FormDataInterface) => {
@@ -41,7 +37,7 @@ export const useCampaign = defineStore('campaign', () => {
     loading.value = false;
   };
 
-  const update = async (id: string, body: FormDataInterface) => {
+  const update = async (body: FormDataInterface, id: string) => {
     loading.value = true;
     const campaign = await api.campaign.update(id, body);
     loading.value = false;
@@ -49,10 +45,13 @@ export const useCampaign = defineStore('campaign', () => {
     return campaign;
   };
 
+  const clearSelected = () => {
+    selectedCampaign.value = null;
+  };
+
   return {
     loading,
     campaigns,
-    selectedCampaignId,
     selectedCampaign,
     create,
     update,
@@ -60,6 +59,7 @@ export const useCampaign = defineStore('campaign', () => {
     getOne,
     remove,
     refresh,
+    clearSelected,
     needsRefresh
   };
 });

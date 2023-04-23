@@ -6,6 +6,7 @@ import { useSidebar } from '~/composables/sidebar.composable';
 import CampaignSidebar from '~/components/CampaignSidebar.vue';
 import ElementCards from '~/components/ElementCards.vue';
 import HeaderCard from '~/components/HeaderCard.vue';
+import { useElement } from '~/stores/element.store';
 
 definePageMeta({
   middleware: 'auth'
@@ -15,29 +16,45 @@ const $sidebar = useSidebar();
 const $route = useRoute();
 const $router = useRouter();
 const $campaign = useCampaign();
+const $element = useElement();
 
-const id = computed(() => String($route.params.campaignId));
 const { selectedCampaign, loading } = storeToRefs($campaign);
 
-onMounted(() => {
-  $campaign.getOne(id.value);
+const selectedCampaignId = computed(() =>
+  $route.params.campaignId ? String($route.params.campaignId) : undefined
+);
+
+onUnmounted(() => {
+  $campaign.clearSelected();
+  $element.clearList();
 });
 
 const open = () => $sidebar.open();
 
 const remove = async () => {
-  await $campaign.remove(id.value);
+  await $campaign.remove(selectedCampaignId.value);
   await $router.replace({ name: 'campaigns' });
 };
 
 watch(
   () => $campaign.needsRefresh,
-  () => $campaign.getOne(id.value)
+  () => $campaign.getOne(selectedCampaignId.value)
 );
 
 watch(
-  () => id.value,
-  () => $campaign.getOne(id.value)
+  () => selectedCampaignId.value,
+  (campaignId) => {
+    if (!campaignId) return;
+    $campaign.getOne(campaignId);
+    $element.get(campaignId);
+  },
+  { immediate: true }
+);
+
+watch(
+  () => $element.needsRefresh,
+  () => $element.get(),
+  { immediate: true }
 );
 </script>
 

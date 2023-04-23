@@ -10,20 +10,18 @@ export const useElementService = () => {
     CreateElementDto,
     UpdateElementDto
   );
-  const baseUrl = (campaignId: string, id?: string) =>
+  const baseUrl = ({ campaignId, id }: { campaignId?: string; id?: string }) =>
     id
       ? `/api/secure/elements/${id}`
       : `/api/secure/campaigns/${campaignId}/elements`;
 
   return {
     create: async (campaignId: string, body: FormDataInterface) =>
-      $base.create!(baseUrl(campaignId), body),
-    update: async (campaignId: string, id: string, body: FormDataInterface) =>
-      $base.update!(baseUrl(campaignId, id), body),
-    get: async (campaignId: string) => $base.get(baseUrl(campaignId)),
-    getOne: async (campaignId: string, id: string) =>
-      $base.getOne(baseUrl(campaignId, id)),
-    remove: async (campaignId: string, id: string) =>
-      $base.remove(baseUrl(campaignId, id))
+      $base.create!(baseUrl({ campaignId }), body),
+    update: async (id: string, body: FormDataInterface) =>
+      $base.update!(baseUrl({ id }), body),
+    get: async (campaignId: string) => $base.get(baseUrl({ campaignId })),
+    getOne: async (id: string) => $base.getOne(baseUrl({ id })),
+    remove: async (id: string) => $base.remove(baseUrl({ id }))
   };
 };

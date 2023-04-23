@@ -1,14 +1,11 @@
-import { storeToRefs } from 'pinia';
 import { FormDataInterface } from '~/interfaces/form-data.interface';
 import { api } from '~/plugins/di';
 import { ElementDto } from '~/domain/elements/element.dto';
-import { useCampaign } from '~/stores/campaign.store';
 
 export const useElement = defineStore('element', () => {
   const needsRefresh = ref<number>(Date.now());
   const loading = ref(false);
-  const elements = ref<ElementDto[]>([]);
-  const { selectedCampaignId } = storeToRefs(useCampaign());
+  const elements = reactive<ElementDto[]>([]);
   const selectedElement = ref<ElementDto | null>();
   const refresh = () => (needsRefresh.value = Date.now());
 
@@ -23,30 +20,34 @@ export const useElement = defineStore('element', () => {
     return element;
   };
 
-  const get = async () => {
+  const get = async (campaignId: string) => {
     loading.value = true;
-    elements.value = selectedCampaignId.value
-      ? await api.element.get(selectedCampaignId.value)
-      : [];
+    const data = await api.element.get(campaignId);
+    elements.length = 0;
+    elements.push(...data);
     loading.value = false;
   };
 
   const getOne = async (id: string) => {
     loading.value = true;
-    selectedElement.value = selectedCampaignId.value
-      ? await api.element.getOne(selectedCampaignId.value, id)
-      : null;
+    selectedElement.value = await api.element.getOne(id);
     loading.value = false;
   };
 
   const update = async (id: string, body: FormDataInterface) => {
     loading.value = true;
-    const element = selectedCampaignId.value
-      ? await api.element.update(selectedCampaignId.value, id, body)
-      : null;
+    const element = await api.element.update(id, body);
     loading.value = false;
     refresh();
     return element;
+  };
+
+  const clearSelected = () => {
+    selectedElement.value = null;
+  };
+
+  const clearList = () => {
+    elements.length = 0;
   };
 
   return {
@@ -58,6 +59,8 @@ export const useElement = defineStore('element', () => {
     update,
     loading,
     get,
-    selectedElement
+    selectedElement,
+    clearSelected,
+    clearList
   };
 });

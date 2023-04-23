@@ -2,20 +2,14 @@
 import { storeToRefs } from 'pinia';
 import { useSidebar } from '~/composables/sidebar.composable';
 import { useElement } from '~/stores/element.store';
-import { useCampaign } from '~/stores/campaign.store';
 
 const $sidebar = useSidebar();
 const $router = useRouter();
+const $route = useRoute();
 const $element = useElement();
 
 const { elements } = storeToRefs($element);
-const { selectedCampaignId } = useCampaign();
-
-watch(
-  () => $element.needsRefresh,
-  () => $element.get(),
-  { immediate: true }
-);
+const selectedCampaignId = computed(() => String($route.params.campaignId));
 
 const open = async () => {
   await $router.replace({ query: { element: 'true' } });
@@ -25,7 +19,7 @@ const open = async () => {
 const openElement = (elementId: string) => {
   $router.push({
     name: 'campaigns-campaignId-elements-elementId',
-    params: { campaignId: selectedCampaignId, elementId }
+    params: { campaignId: selectedCampaignId.value, elementId }
   });
 };
 </script>
