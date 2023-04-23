@@ -23,7 +23,7 @@ const signUp = async (signUp: FormDataInterface) => {
 </script>
 
 <template>
-  <div class="signup-form card-wood">
+  <div class="signup-form">
     <h1 class="form-title">Sign Up</h1>
 
     <BaseForm

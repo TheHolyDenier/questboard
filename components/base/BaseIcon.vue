@@ -18,18 +18,20 @@ const src = `/icons/${props.icon}.svg`;
 </script>
 
 <template>
-  <span
-    class="icon"
-    :class="{ [color]: true, contrast: contrastColor }"
-    :style="{
-      '-webkit-mask': `url(${src}) no-repeat center / contain`,
-      mask: `url(${src}) no-repeat center / contain`,
-      width: size,
-      height: size
-    }"
-    :data-tooltip="tooltip"
-    data-placement="top"
-  ></span>
+  <BaseTooltip :tooltip="tooltip">
+    <span
+      class="icon"
+      :class="{ [color]: true, contrast: contrastColor }"
+      :style="{
+        '-webkit-mask': `url(${src}) no-repeat center / contain`,
+        mask: `url(${src}) no-repeat center / contain`,
+        width: size,
+        height: size
+      }"
+      :data-tooltip="tooltip"
+      data-placement="top"
+    ></span>
+  </BaseTooltip>
 </template>
 
 <style scoped lang="scss">

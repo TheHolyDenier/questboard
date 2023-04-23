@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <div class="card-wood intro">
+    <div class="intro">
       <h1>Questboard</h1>
       <p>
         Questboard is the ultimate solution for all your tabletop RPG needs.

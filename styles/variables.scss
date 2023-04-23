@@ -7,13 +7,6 @@ $green-light: #fdfefd;
 
 $phoneWidth: 650px;
 
-$patternBackground:   radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, $primary 10px, rgba(96, 16, 48, 0) 11px) 0px 10px,
-radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, $primary 10px, rgba(96, 16, 48, 0) 11px),
-$secondary;
-$patternBackgroundSize: 20px 20px;
-$patternBackgroundContrast: $blue;
-
-
 @font-face {
   font-family: 'VinaSans';
   src: url('public/fonts/VinaSans-Regular.ttf') format('truetype');

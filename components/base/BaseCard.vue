@@ -33,14 +33,14 @@ defineProps({
         <slot name="actions"></slot>
       </div>
     </div>
+
     <div class="card__container">
       <template v-if="title || $slots.title">
         <slot name="title">
-          <div class="card__title">
-            <h2>{{ title }}</h2>
-          </div>
+          <h2>{{ title }}</h2>
         </slot>
       </template>
+
       <template v-if="subtitle || $slots.subtitle">
         <slot name="subtitle">
           <p>{{ subtitle }}</p>
@@ -59,6 +59,7 @@ defineProps({
 .card {
   display: flex;
   flex-wrap: wrap;
+  overflow: visible;
 
   &__image {
     flex: 1;
@@ -67,6 +68,8 @@ defineProps({
     min-width: 150px;
     min-height: 150px;
     background-color: $blue;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
 
     &__actions {
       display: flex;
@@ -86,14 +89,11 @@ defineProps({
       width: 100%;
       text-align: center;
     }
-  }
-}
 
-.card__title {
-  background: $patternBackground;
-  background-size: $patternBackgroundSize;
-  padding: 0.5em;
-  color: $patternBackgroundContrast;
-  width: 100%;
+    h2 {
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 </style>
