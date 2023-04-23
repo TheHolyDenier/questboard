@@ -26,6 +26,7 @@ export const useCampaign = defineStore('campaign', () => {
   };
 
   const getOne = async (id: string) => {
+    clearSelected();
     loading.value = true;
     selectedCampaign.value = await api.campaign.getOne(id);
     loading.value = false;

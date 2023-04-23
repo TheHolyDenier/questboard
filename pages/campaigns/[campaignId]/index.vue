@@ -24,27 +24,23 @@ const selectedCampaignId = computed(() =>
   $route.params.campaignId ? String($route.params.campaignId) : undefined
 );
 
-onUnmounted(() => {
-  $campaign.clearSelected();
-  $element.clearList();
-});
-
 const open = () => $sidebar.open();
 
 const remove = async () => {
-  await $campaign.remove(selectedCampaignId.value);
+  await $campaign.remove(selectedCampaignId.value!);
   await $router.replace({ name: 'campaigns' });
 };
 
 watch(
   () => $campaign.needsRefresh,
-  () => $campaign.getOne(selectedCampaignId.value)
+  () => $campaign.getOne(selectedCampaignId.value!)
 );
 
 watch(
   () => selectedCampaignId.value,
   (campaignId) => {
     if (!campaignId) return;
+
     $campaign.getOne(campaignId);
     $element.get(campaignId);
   },
@@ -53,7 +49,7 @@ watch(
 
 watch(
   () => $element.needsRefresh,
-  () => $element.get(),
+  () => $element.get(selectedCampaignId.value!),
   { immediate: true }
 );
 </script>

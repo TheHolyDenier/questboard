@@ -7,8 +7,6 @@ const $element = useElement();
 
 const { selectedElement, loading } = storeToRefs($element);
 
-onUnmounted(() => $element.clearSelected());
-
 watch(
   () => $route.params.elementId,
   (elementId) => {

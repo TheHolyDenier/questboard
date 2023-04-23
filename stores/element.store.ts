@@ -21,6 +21,7 @@ export const useElement = defineStore('element', () => {
   };
 
   const get = async (campaignId: string) => {
+    clearList();
     loading.value = true;
     const data = await api.element.get(campaignId);
     elements.length = 0;
@@ -29,6 +30,7 @@ export const useElement = defineStore('element', () => {
   };
 
   const getOne = async (id: string) => {
+    clearSelected();
     loading.value = true;
     selectedElement.value = await api.element.getOne(id);
     loading.value = false;
