@@ -2,16 +2,14 @@
 import { storeToRefs } from 'pinia';
 import { useBreadcrumb } from '~/stores/breadcrumb.store';
 import BaseBreadcrumbPath from '~/components/base/BaseBreadcrumbPath.vue';
-import { Navigation } from '~/utils/navigation';
+import { NavigationInterface } from '~/interfaces/navigation.interface';
 
 const $route = useRoute();
 
 const { navigation } = storeToRefs(useBreadcrumb());
 
-const activeNavigation = computed<Navigation[]>(() => {
-  const index = navigation.value
-    .filter((path) => !path.paramProperty || path.id)
-    .findIndex((path) => path.name === $route.name);
+const activeNavigation = computed<NavigationInterface[]>(() => {
+  const index = navigation.value.findIndex((path) => path.name === $route.name);
   if (index === -1) return [navigation.value[0]];
 
   return navigation.value.slice(0, index + 1);
@@ -28,7 +26,7 @@ const activeNavigation = computed<Navigation[]>(() => {
       <div v-if="index === activeNavigation.length - 1">
         <BaseBreadcrumbPath :path="path" />
       </div>
-      <RouterLink v-else :to="path.to">
+      <RouterLink v-else-if="path.getTo" :to="path.getTo()">
         <BaseBreadcrumbPath :path="path" has-action />
       </RouterLink>
     </div>
