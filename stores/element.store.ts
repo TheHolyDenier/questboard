@@ -52,6 +52,12 @@ export const useElement = defineStore('element', () => {
     elements.length = 0;
   };
 
+  const remove = async (id: string) => {
+    loading.value = true;
+    await api.element.remove(id);
+    loading.value = false;
+  };
+
   return {
     needsRefresh,
     refresh,
@@ -61,6 +67,7 @@ export const useElement = defineStore('element', () => {
     update,
     loading,
     get,
+    remove,
     selectedElement,
     clearSelected,
     clearList

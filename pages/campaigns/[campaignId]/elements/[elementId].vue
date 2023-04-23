@@ -1,20 +1,34 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useElement } from '~/stores/element.store';
+import HeaderCard from '~/components/HeaderCard.vue';
 
 const $route = useRoute();
+const $router = useRouter();
 const $element = useElement();
 
 const { selectedElement, loading } = storeToRefs($element);
 
+const selectedElementId = computed(() =>
+  $route.params.elementId ? String($route.params.elementId) : null
+);
+
 watch(
-  () => $route.params.elementId,
+  () => selectedElementId.value,
   (elementId) => {
     if (!elementId) return;
-    $element.getOne(String(elementId));
+    $element.getOne(elementId);
   },
   { immediate: true }
 );
+
+const remove = async () => {
+  await $element.remove(selectedElementId.value!);
+  await $router.replace({
+    name: 'campaigns-campaignId',
+    params: { campaignId: $route.params.campaignId }
+  });
+};
 </script>
 
 <template>
@@ -23,7 +37,8 @@ watch(
       :image="selectedElement?.cover"
       :title="selectedElement?.name"
       :loading="!selectedElement || loading"
-    ></HeaderCard>
+      @on:delete="remove"
+    />
 
     <BaseMarkdownViewer
       v-if="selectedElement"
